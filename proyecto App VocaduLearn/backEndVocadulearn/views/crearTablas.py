@@ -1,8 +1,9 @@
 
 import sqlite3
 class CrearTablas():
+    coneccion='sql3.db'
     def create_table_usuario(self):
-            connection = sqlite3.connect('sql3.db')
+            connection = sqlite3.connect(self.coneccion)
             cursor = connection.cursor()
             
             # Define la estructura de la tabla
@@ -19,7 +20,7 @@ class CrearTablas():
             connection.close()
             
     def create_table_account(self):
-            connection = sqlite3.connect('sql3.db')
+            connection = sqlite3.connect(self.coneccion)
             cursor = connection.cursor()
             
             # Define la estructura de la tabla
@@ -36,7 +37,7 @@ class CrearTablas():
             
     def get_last_id_usuario(self):
         self.create_table_usuario()
-        connection = sqlite3.connect('sql3.db')
+        connection = sqlite3.connect(self.coneccion)
         cursor = connection.cursor()
         cursor.execute('SELECT MAX(id) FROM usuarios')
         last_id = cursor.fetchone()[0]
@@ -46,7 +47,7 @@ class CrearTablas():
 
     def get_last_id_account(self):
         self.create_table_account()
-        connection = sqlite3.connect('sql3.db')
+        connection = sqlite3.connect(self.coneccion)
         cursor = connection.cursor()
         cursor.execute('SELECT MAX(id) FROM account')
         last_id = cursor.fetchone()[0]

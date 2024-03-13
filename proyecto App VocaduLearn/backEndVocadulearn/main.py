@@ -2,7 +2,8 @@ from views.viwUsuario import ViwUsuario
 from models.usuario import Usuario
 xd=ViwUsuario()
 pepe=Usuario("pe1")
-xd.insert_usuario(pepe)
+
+xd.crearUsuario("pepe")
 for i in xd.ver_tabla_usuario():
     txt=[]
     for x in range (len(i)):
