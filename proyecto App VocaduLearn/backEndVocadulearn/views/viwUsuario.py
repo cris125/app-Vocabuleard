@@ -1,13 +1,14 @@
 import sqlite3
 
-from usuario import Usuario
-from crearTablas import CrearTablas
+from models.usuario import Usuario
+from views.crearTablas import CrearTablas
 
 
 class ViwUsuario:
+    crearTablas=CrearTablas()
     def crearUsuario(self,user:str):
-        CrearTablas.create_table_account()
-        CrearTablas.create_table_usuario()
+        self.crearTablas.create_table_account()
+        self.crearTablas.create_table_usuario()
         newUser=Usuario(user)
         self.insert_usuario(newUser)
 
@@ -68,17 +69,6 @@ class ViwUsuario:
         connection.close()
         return(usuarios)
 # Ejemplo de uso
-xd=ViwUsuario()
-pepe=Usuario("pe1")
-xd.insert_usuario(pepe)
-for i in xd.ver_tabla_usuario():
-    txt=[]
-    for x in range (len(i)):
-        if x==2:
-            txt.append(xd.ver_tabla_account(i[x]))
-        else:
 
-            txt.append(i[x])
-    print(txt)
     
 

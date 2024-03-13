@@ -1,4 +1,4 @@
-from crearTablas import CrearTablas
+from views.crearTablas import CrearTablas
 
 class Account:
     def __init__(self):
