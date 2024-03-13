@@ -1,16 +1,18 @@
 import sqlite3
 
-from models import Usuario
-from viws.utilsSql import crearTablas
-class viwUsuario:
+from usuario import Usuario
+from crearTablas import CrearTablas
+
+
+class ViwUsuario:
     def crearUsuario(self,user:str):
-        crearTablas.create_table_account()
-        crearTablas.create_table_usuario()
+        CrearTablas.create_table_account()
+        CrearTablas.create_table_usuario()
         newUser=Usuario(user)
         self.insert_usuario(newUser)
 
     def insert_usuario(self,usuario):
-        
+        self.insert_account(usuario)
         connection = sqlite3.connect('sql3.db')
         cursor = connection.cursor()
         cursor.execute('''
@@ -33,7 +35,7 @@ class viwUsuario:
         connection.commit()
         connection.close()
             
-    def ver_tabla(self):
+    def ver_tabla_usuario(self):
         connection = sqlite3.connect('sql3.db')
         cursor = connection.cursor()
         # Define la estructura de la tabla
@@ -43,7 +45,40 @@ class viwUsuario:
         usuarios = cursor.fetchall()
         connection.close()
         return(usuarios)
+    
+    def ver_tabla_account(self,id):
+        connection = sqlite3.connect('sql3.db')
+        cursor = connection.cursor()
+        # Define la estructura de la tabla
+        cursor.execute('''
+            SELECT * FROM  account WHERE id = ?; 
+        ''',(id,))
+        usuarios = cursor.fetchall()
+        connection.close()
+        return(usuarios)
+    
+    def ver_account(self):
+        connection = sqlite3.connect('sql3.db')
+        cursor = connection.cursor()
+        # Define la estructura de la tabla
+        cursor.execute('''
+            SELECT * FROM  account; 
+        ''')
+        usuarios = cursor.fetchall()
+        connection.close()
+        return(usuarios)
 # Ejemplo de uso
-crearUsuario("John Doe")
-ver_tabla()
+xd=ViwUsuario()
+pepe=Usuario("pe1")
+xd.insert_usuario(pepe)
+for i in xd.ver_tabla_usuario():
+    txt=[]
+    for x in range (len(i)):
+        if x==2:
+            txt.append(xd.ver_tabla_account(i[x]))
+        else:
+
+            txt.append(i[x])
+    print(txt)
+    
 
