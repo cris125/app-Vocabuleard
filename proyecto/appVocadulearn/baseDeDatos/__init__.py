@@ -1,2 +1,2 @@
 from .crearTablas import CrearTablas
-from .viwUsuario import ViwUsuario
+from .dbUsuario import DbUsuario

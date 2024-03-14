@@ -1,10 +1,10 @@
 import sqlite3
 
 from models.usuario import Usuario
-from views.crearTablas import CrearTablas
+from baseDeDatos.crearTablas import CrearTablas
 
 
-class ViwUsuario:
+class DbUsuario:
     crearTablas=CrearTablas()
     coneccion='sql3.db'
     def crearUsuario(self,user:str):

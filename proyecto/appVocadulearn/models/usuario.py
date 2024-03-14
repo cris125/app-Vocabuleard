@@ -2,7 +2,7 @@
 import sqlite3
 
 from models.account import Account  # Asumiendo que la clase Account está en un archivo llamado Account.py
-from views.crearTablas import CrearTablas
+from baseDeDatos.crearTablas import CrearTablas
 class Usuario():
     
     def __init__(self, userName: str):
