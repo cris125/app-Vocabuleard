@@ -1,9 +1,9 @@
 from baseDeDatos.dbUsuario import DbUsuario
-from views.ventanaVerUsuarios import VentanaVerUsuarios
+from views.ventanaVerUsuarios import VentanaVerUsuarios 
 class Main:
     def verUsuarios(self):
         xd=DbUsuario()
-        xd.crearUsuario("diego2")
+        xd.crearUsuario("hola123")
         listaUsuarios=[]
         for i in xd.ver_tabla_usuario():
             infoUsuario=[]
@@ -15,4 +15,6 @@ class Main:
             listaUsuarios.append(infoUsuario)    
         print(listaUsuarios)
 xd=Main()
+
 xd.verUsuarios()
+ven=VentanaVerUsuarios()
