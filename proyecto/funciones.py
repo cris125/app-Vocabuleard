@@ -1,9 +1,10 @@
 from baseDeDatos.dbUsuario import DbUsuario
-from views.ventanaVerUsuarios import VentanaVerUsuarios 
+from views.ventanaMain import VentanaMain 
+from baseDeDatos.eliminarTablas import ElimTablas
 class Main:
     def verUsuarios(self):
         xd=DbUsuario()
-        xd.crearUsuario("hola123")
+        xd.crearUsuario("Cristhian1")
         listaUsuarios=[]
         for i in xd.ver_tabla_usuario():
             infoUsuario=[]
@@ -14,7 +15,12 @@ class Main:
                     infoUsuario.append(i[x])
             listaUsuarios.append(infoUsuario)    
         print(listaUsuarios)
-xd=Main()
+        
+a=Main()  
+a.verUsuarios()  
+a1=  VentanaMain()
 
-xd.verUsuarios()
-ven=VentanaVerUsuarios()
+# si el programa se descontrola
+"""xd=ElimTablas()
+xd.drop_table_usuario()
+xd.drop_table_account()"""

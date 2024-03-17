@@ -1,2 +1,2 @@
-from .ventanaVerUsuarios import VentanaVerUsuarios
-from .viewMain import VentanaMain
+from .ventanaMain import VentanaMain
+from .viewVerUsuarios import ViewVerUsuarios

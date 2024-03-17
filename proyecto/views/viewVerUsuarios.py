@@ -2,7 +2,7 @@
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
 
-class VentanaMain:
+class ViewVerUsuarios:
 
     def consultarUsuarios(self):
         
@@ -31,7 +31,7 @@ class VentanaMain:
         txt_number = ft.Text(value="Los Usuarios Son", text_align=ft.TextAlign.CENTER, width=500,size=30)
         
         
-        return ft.Row([
+        return ft.Column([
             ft.Row([txt_number],alignment=ft.MainAxisAlignment.CENTER,),
             ft.Row([
             ft.DataTable(columns=[
