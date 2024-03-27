@@ -1,7 +1,7 @@
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
 from views.viewVerUsuarios import ViewVerUsuarios
-
+from views.viewIniciarSesion import ViewIniciarSesion
 class VentanaMain:
     def __init__(self):
         ft.app(target=self.main)
@@ -13,7 +13,12 @@ class VentanaMain:
             a=ViewVerUsuarios()
             res=a.main()
             page.add(res)
-            
+        def pagInicio(e):
+            limpiar()
+            a=ViewIniciarSesion()   
+            res=a.pestañaInicio()
+            page.add(res) 
+
         def limpiar(*e):
             page.clean()
             page.add(interfaz())
@@ -29,7 +34,7 @@ class VentanaMain:
                         width=150,height=50,
                         padding=5,),
                 ft.Container(
-                        ft.OutlinedButton(text="Iniciar sesion",width=100),
+                        ft.OutlinedButton(text="Iniciar sesion",width=100,on_click=pagInicio),
                         width=150,height=50,
                         padding=5,),
                 ],alignment=ft.MainAxisAlignment.SPACE_EVENLY,),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)

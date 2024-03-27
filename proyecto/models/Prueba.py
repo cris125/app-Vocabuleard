@@ -1,4 +1,4 @@
-from Pregunta import Pregunta
+from .Pregunta import Pregunta
 class Prueba:
     def __init__(self,nombre) -> None:
         self.preguntas=[]
@@ -6,7 +6,7 @@ class Prueba:
     def insertarPregunta(self,pregunta):
         self.preguntas.append(pregunta)
     
-    def hacerCuestionario(self):
+    def hacerCuestionario(self):  
         for i in self.preguntas:
             print (i.pregunta)
             print(i.respuestas)
