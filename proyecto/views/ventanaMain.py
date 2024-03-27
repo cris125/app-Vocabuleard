@@ -29,7 +29,7 @@ class VentanaMain:
                         width=150,height=50,
                         padding=5,),
                 ft.Container(
-                        ft.OutlinedButton(text="Iniciar secion",width=100),
+                        ft.OutlinedButton(text="Iniciar sesion",width=100),
                         width=150,height=50,
                         padding=5,),
                 ],alignment=ft.MainAxisAlignment.SPACE_EVENLY,),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)

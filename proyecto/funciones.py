@@ -2,9 +2,10 @@ from baseDeDatos.dbUsuario import DbUsuario
 from views.ventanaMain import VentanaMain 
 from baseDeDatos.eliminarTablas import ElimTablas
 class Main:
+    
     def verUsuarios(self):
         xd=DbUsuario()
-        xd.crearUsuario("Cristhian1")
+        xd.crearAdmin("1027521775")
         listaUsuarios=[]
         for i in xd.ver_tabla_usuario():
             infoUsuario=[]

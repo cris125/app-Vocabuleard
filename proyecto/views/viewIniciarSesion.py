@@ -2,7 +2,7 @@
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
 
-class ViewVerUsuarios:
+class ViewIniciarSesion:
 
     def consultarUsuarios(self):
         
@@ -42,4 +42,3 @@ class ViewVerUsuarios:
                
             
         ])
-            

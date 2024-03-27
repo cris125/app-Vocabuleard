@@ -11,7 +11,19 @@ class DbUsuario:
         port="16333",
         database="railway"
     )
-
+    def crearAdmin(self, user: str):
+        try:
+            if not self.verificar_usuario(user):
+                self.crearTablas.create_table_account()
+                self.crearTablas.create_table_usuario()
+                newAdmin = Usuario(user)
+                newAdmin.account.admin=True
+                self.insert_usuario(newAdmin)
+            else:
+                print("El admin ya existe")
+        except mysql.connector.Error as e:
+            print(f"Error al crear admin: {e}")
+            
     def crearUsuario(self, user: str):
         try:
             if not self.verificar_usuario(user):
@@ -46,9 +58,10 @@ class DbUsuario:
                 INSERT INTO account (
                     id, 
                     prueba,
-                    activate)
-                VALUES (%s, %s, %s)
-            ''', (usuario.id_account, usuario.account.prueba, usuario.account.activate))
+                    activate,
+                    admin)
+                VALUES (%s, %s, %s, %s)
+            ''', (usuario.id_account, usuario.account.prueba, usuario.account.activate,usuario.account.admin))
             self.conexion.commit()
         except mysql.connector.Error as e:
             print(f"Error al insertar cuenta: {e}")

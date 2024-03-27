@@ -11,4 +11,5 @@ class Account:
         self.prueba = None
         self.activate = True
         self.nota = None
+        self.admin=False
 

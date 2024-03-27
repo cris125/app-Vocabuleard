@@ -22,6 +22,8 @@ class CrearTablas():
                 )
             ''')
             self.conexion.commit()
+            
+            
         except mysql.connector.Error as e:
             print("Error al crear la tabla de usuarios:", e)
         finally:
@@ -37,7 +39,8 @@ class CrearTablas():
                 CREATE TABLE IF NOT EXISTS account (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     prueba VARCHAR(255),
-                    activate BOOLEAN           
+                    activate BOOLEAN,
+                    admin BOOLEAN            
                 )
             ''')
             self.conexion.commit()
