@@ -19,8 +19,10 @@ class DbUsuario:
                 newAdmin = Usuario(user)
                 newAdmin.account.admin=True
                 self.insert_usuario(newAdmin)
+                return(user)
             else:
                 print("El admin ya existe")
+                return(user)
         except mysql.connector.Error as e:
             print(f"Error al crear admin: {e}")
             
@@ -31,10 +33,27 @@ class DbUsuario:
                 self.crearTablas.create_table_usuario()
                 newUser = Usuario(user)
                 self.insert_usuario(newUser)
+                return(newUser)
             else:
                 print("El usuario ya existe")
+                return(self.getUser(user))
         except mysql.connector.Error as e:
             print(f"Error al crear usuario: {e}")
+
+    def getUser(self, usuarioStr):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                SELECT * FROM usuarios WHERE userName = %s ;
+            ''', (usuarioStr,))
+            usuario = cursor.fetchall()
+            return usuario
+        except mysql.connector.Error as e:
+            print(f"Error al ver tabla de usuarios: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+
 
     def insert_usuario(self, usuario):
         try:

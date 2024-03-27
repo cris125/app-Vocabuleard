@@ -16,8 +16,13 @@ class VentanaMain:
         def pagInicio(e):
             limpiar()
             a=ViewIniciarSesion()   
-            res=a.pestañaInicio()
+            res=a.pestañaInicio(page)
             page.add(res) 
+
+        def bienvenida(*e):
+            page.clean()
+            page.add(interfaz())
+            page.add(ft.Row([ft.Text(value="Bienvenido de vuelta", text_align=ft.TextAlign.CENTER, width=500,size=30)],alignment=ft.MainAxisAlignment.CENTER,))
 
         def limpiar(*e):
             page.clean()
@@ -26,7 +31,7 @@ class VentanaMain:
         def interfaz():    
             controlarInterfaz=ft.Container(ft.Row([
                 ft.Container(
-                        ft.OutlinedButton(text="Inicio",width=100,on_click=limpiar),
+                        ft.OutlinedButton(text="Inicio",width=100,on_click=bienvenida),
                         width=150,height=50,
                         padding=5,),
                 ft.Container(
