@@ -8,7 +8,30 @@ class CrearTablas():
         port="16333",
         database="railway"
     )
-    
+    def __init__(self) -> None:
+        self.create_table_prueba()
+        self.create_table_usuario()
+        self.create_table_account()
+        
+    def create_table_prueba(self):
+        try:
+            cursor = self.conexion.cursor()
+
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS pruebas (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    nombre TEXT,
+                    preguntas TEXT,
+                    intentos INT,
+                    calificacion INT
+                )
+            ''')
+            self.conexion.commit()
+            cursor.close()
+        except mysql.connector.Error as e:
+            print("Error al guardar en la base de datos:", e)
+            
+            
     def create_table_usuario(self):
         try:
             cursor = self.conexion.cursor()
@@ -53,7 +76,6 @@ class CrearTablas():
     def get_last_id_usuario(self):
         last_id = 0
         try:
-            self.create_table_usuario()
             cursor = self.conexion.cursor()
             cursor.execute('SELECT MAX(id) FROM usuarios')
             last_id = cursor.fetchone()[0]
@@ -67,7 +89,6 @@ class CrearTablas():
     def get_last_id_account(self):
         last_id = 0
         try:
-            self.create_table_account()
             cursor = self.conexion.cursor()
             cursor.execute('SELECT MAX(id) FROM account')
             last_id = cursor.fetchone()[0]

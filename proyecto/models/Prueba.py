@@ -1,17 +1,22 @@
-from .Pregunta import Pregunta
+import json
+import sqlite3
+from baseDeDatos import dbPrueba
 class Prueba:
-    def __init__(self,nombre) -> None:
-        self.preguntas=[]
-        self.nombre=nombre
-    def insertarPregunta(self,pregunta):
+    def __init__(self, nombre) -> None:
+        
+        last_id=dbPrueba()
+        last_id=last_id.get_last_id_prueba()
+        if last_id is None:
+            self.id = 1  # Si no hay pruebas, establecer el ID como 1
+        else:
+            self.id = int(last_id) + 1
+        self.preguntas = []
+        self.nombre = nombre
+        self.intentos=0
+        self.calificacion=0
+
+    def insertarPregunta(self, pregunta):
         self.preguntas.append(pregunta)
+
     
-    def hacerCuestionario(self):  
-        for i in self.preguntas:
-            print (i.pregunta)
-            print(i.respuestas)
-            T=input()
-            if T==i.respuestaCorrecta:
-                print("bien")
-            else:
-                print("mal")
+    

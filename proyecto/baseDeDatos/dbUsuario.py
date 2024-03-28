@@ -14,8 +14,6 @@ class DbUsuario:
     def crearAdmin(self, user: str):
         try:
             if not self.verificar_usuario(user):
-                self.crearTablas.create_table_account()
-                self.crearTablas.create_table_usuario()
                 newAdmin = Usuario(user)
                 newAdmin.account.admin=True
                 self.insert_usuario(newAdmin)
@@ -29,11 +27,9 @@ class DbUsuario:
     def crearUsuario(self, user: str):
         try:
             if not self.verificar_usuario(user):
-                self.crearTablas.create_table_account()
-                self.crearTablas.create_table_usuario()
                 newUser = Usuario(user)
                 self.insert_usuario(newUser)
-                return(newUser)
+                return(self.getUser(user))
             else:
                 print("El usuario ya existe")
                 return(self.getUser(user))
@@ -44,12 +40,27 @@ class DbUsuario:
         try:
             cursor = self.conexion.cursor()
             cursor.execute('''
-                SELECT * FROM usuarios WHERE userName = %s ;
+                SELECT * FROM usuarios WHERE userName = %s 
             ''', (usuarioStr,))
             usuario = cursor.fetchall()
-            return usuario
+            return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]))
         except mysql.connector.Error as e:
             print(f"Error al ver tabla de usuarios: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+    
+    
+    def getAccountId(self, id:int):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                SELECT * FROM account WHERE id = %s 
+            ''', (id,))
+            account = cursor.fetchall()
+            return account
+        except mysql.connector.Error as e:
+            print(f"Error al ver tabla de account: {e}")
         finally:
             if cursor:
                 cursor.close()

@@ -12,6 +12,13 @@ class ElimTablas:
     def __init__(self):
         self.cursor = self.conexion.cursor()
 
+    def drop_table_pruebas(self):
+        try:
+            self.cursor.execute("DROP TABLE IF EXISTS pruebas")
+            print("La tabla usuarios ha sido eliminada correctamente")
+        except mysql.connector.Error as e:
+            print("Error al eliminar la tabla de usuarios:", e)
+    
     def drop_table_usuario(self):
         try:
             self.cursor.execute("DROP TABLE IF EXISTS usuarios")
