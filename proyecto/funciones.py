@@ -5,7 +5,7 @@ class Main:
     
     def verUsuarios(self):
         xd=DbUsuario()
-        xd.crearAdmin("1027521775")
+        """xd.crearAdmin("1027521775")"""
         listaUsuarios=[]
         for i in xd.ver_tabla_usuario():
             infoUsuario=[]
@@ -20,6 +20,7 @@ class Main:
 a=Main()  
 a.verUsuarios()  
 a1=  VentanaMain()
+a1.iniciar()
 
 # si el programa se descontrola
 """xd=ElimTablas()

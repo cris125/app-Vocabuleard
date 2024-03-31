@@ -98,6 +98,33 @@ class DbUsuario:
         finally:
             if cursor:
                 cursor.close()
+                
+    def eliminar_usuario(self, idUsuario, idAccount):
+        try:
+            self.eliminar_account(idAccount)
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                DELETE FROM usuarios WHERE id = %s
+            ''', (idUsuario,))
+            self.conexion.commit()
+        except mysql.connector.Error as e:
+            print(f"Error al eliminar usuario: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+
+    def eliminar_account(self, id):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                DELETE FROM account WHERE id = %s
+            ''', (id,))
+            self.conexion.commit()
+        except mysql.connector.Error as e:
+            print(f"Error al eliminar cuenta: {e}")
+        finally:
+            if cursor:
+                cursor.close()
 
     def ver_tabla_usuario(self):
         try:
