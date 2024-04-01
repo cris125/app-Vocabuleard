@@ -5,7 +5,7 @@ from .viewPrincipalAdmin import VentanaPrincipalAdmin
 from .viewAgregarPrueba import ViewAgregarPrueba
 class VentanaMain:
     def iniciar(self):
-        ft.app(target=self.main)
+        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
         
     def route(self,route):
         self.page.views.clear()
@@ -26,14 +26,15 @@ class VentanaMain:
             a=VentanaPrincipalAdmin()
               
             self.page.views.append(ft.View(
-                    "/pagInicioAdmin/agregarPrueba",[a.ventanaAdmin(self.page),a.pagUsuarios( )],
+                    "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),a.pagUsuarios()],
         ))
             
         if  self.page.route == "/pagInicioAdmin/agregarPrueba":
             a=VentanaPrincipalAdmin()
             h=ViewAgregarPrueba(self.page)    
             self.page.views.append(ft.View(
-                    "/pagInicioAdmin/agregarPrueba",[a.ventanaAdmin(self.page),h.prueba()],
+                    "/pagInicioAdmin/agregarPrueba",[ft.Column([a.ventanaAdmin(self.page),h.prueba()]
+                                                               ,scroll=True,alignment=ft.alignment.center,)],
         ))
         if  self.page.route == "/pagInicioUsuarios":
             self.page.views.append(ft.View(
