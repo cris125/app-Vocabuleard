@@ -17,8 +17,8 @@ class Main:
             listaUsuarios.append(infoUsuario)    
         print(listaUsuarios)
         
-a=Main()  
-a.verUsuarios()  
+"""a=Main()  
+a.verUsuarios()  """
 a1=  VentanaMain()
 a1.iniciar()
 

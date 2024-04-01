@@ -1,12 +1,12 @@
 
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
-from .viewAgregarPrueba import ViewAgregarPrueba
-from .viewPrincipalAdmin import VentanaPrincipalAdmin
+
 import time 
 class ViewIniciarSesion:
     textFile=ft.TextField(value="(Numero De usuario)")
     contador=ft.TextField(value="0")
+
     def validarUsuario(self,e):
     
         usuario=DbUsuario()
@@ -15,9 +15,10 @@ class ViewIniciarSesion:
         
         if userName[2][0][3] == True:
             print("es admin")
-            a=VentanaPrincipalAdmin()
-            a.ventanaAdmin(e.control.data)
+            self.page.go("/pagInicioAdmin")
+            
         else:
+            self.page.go("/pagInicioUsuarios")
             print("no es admin")
         """
         para hacer una prueba
@@ -30,8 +31,9 @@ class ViewIniciarSesion:
             page.update()"""
     
     def pestañaInicio(self,page):
+        self.page=page
         return ft.Column([
             ft.Row([ft.Text(value="Iniciar Sesion", text_align=ft.TextAlign.CENTER, width=500,size=30)],alignment=ft.MainAxisAlignment.CENTER,),
             ft.Row([self.textFile],alignment=ft.MainAxisAlignment.CENTER,),
-            ft.Row([ft.TextButton(text="ingresar",data=page,on_click=self.validarUsuario)] ,alignment=ft.MainAxisAlignment.CENTER,  )        
+            ft.Row([ft.TextButton(text="ingresar",on_click=self.validarUsuario)] ,alignment=ft.MainAxisAlignment.CENTER,  )        
         ])
