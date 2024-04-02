@@ -3,7 +3,8 @@ import flet as ft
 from .viewIniciarSesion import ViewIniciarSesion
 from .viewPrincipalAdmin import VentanaPrincipalAdmin
 from .viewAgregarPrueba import ViewAgregarPrueba
-from .agregarAdministradores import AgregarAdministradores
+from .viewAgregarAdministradores import AgregarAdministradores
+from .viewEliminarUsuarios import EliminarUsuarios
 import variableGlobal
 
 class VentanaMain:
@@ -13,6 +14,7 @@ class VentanaMain:
         
     def route(self,route):
         self.page.views.clear()
+       
         self.page.views.append( ft.View(
                 "/",[self.interfaz(),self.bienvenida()],
         ))
@@ -53,7 +55,18 @@ class VentanaMain:
                         h=AgregarAdministradores()    
                         self.page.views.append(ft.View(
                                 "/pagInicioAdmin/agregarAdmin",[ft.Column(
-                                        [a.ventanaAdmin(self.page), h.ventanaAgreAdmin()],
+                                        [a.ventanaAdmin(self.page), h.ventanaAgreAdmin(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
+                        
+                if  self.page.route == "/pagInicioAdmin/eliminarUsuario":
+                        a=VentanaPrincipalAdmin()
+                        h=EliminarUsuarios()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/eliminarUsuario",[ft.Column(
+                                        [a.ventanaAdmin(self.page), h.ventanaEliminarUsuario(self.page)],
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],

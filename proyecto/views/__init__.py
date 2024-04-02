@@ -3,4 +3,5 @@ from .viewVerUsuarios import ViewVerUsuarios
 from .viewIniciarSesion import ViewIniciarSesion
 from .viewAgregarPrueba import ViewAgregarPrueba
 from .viewPrincipalAdmin import VentanaPrincipalAdmin
-from .agregarAdministradores import AgregarAdministradores
+from .viewAgregarAdministradores import AgregarAdministradores
+from .viewEliminarUsuarios import EliminarUsuarios

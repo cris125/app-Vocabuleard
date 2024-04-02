@@ -7,9 +7,10 @@ class ViewAgregarPrueba:
         self.page=page
         self.nombrePrueba=ft.TextField(value="Nombre prueba",width=150,height=35)
         self.newPrueba=Prueba()
-        self.preguntaView=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
+        self.preguntaView=ft.Row(alignment=ft.MainAxisAlignment.CENTER,width= self.page.width)
         self.preguntasGuardadas = ft.Row(scroll=True)
         self.preguntasGuardadasArray=[]
+        
     def guardarPrueba(self,e):
         self.preguntaView.controls.clear()
         self.preguntasGuardadas.controls.clear()
@@ -38,7 +39,7 @@ class ViewAgregarPrueba:
                         ft.Text(value="Respuesta Correcta:"),
                         respuestaCorrecta,
                         ft.TextButton(text="Agregar Pregunta",data=(pregunta.value,[a.value,b.value,c.value,d.value],respuestaCorrecta.value,imagen.value),on_click=self.guardarPregunta)
-             ],scroll=True)
+             ],scroll=True,width= self.page.width,horizontal_alignment=ft.CrossAxisAlignment.CENTER)
                 ,border=ft.border.all(2, ft.colors.BLACK), border_radius=5,padding=5,width=500,height=450)
         self.preguntaView.controls.append(continer)
         self.page.update()
