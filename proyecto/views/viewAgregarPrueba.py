@@ -1,12 +1,23 @@
 import flet as ft
 from models.Prueba import Prueba
 from models.Pregunta import Pregunta
+from baseDeDatos.dbPrueba import dbPrueba
 class ViewAgregarPrueba:
     def __init__(self,page):
         self.page=page
+        self.nombrePrueba=ft.TextField(value="Nombre prueba",width=150,height=35)
+        self.newPrueba=Prueba()
         self.preguntaView=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
         self.preguntasGuardadas = ft.Row(scroll=True)
         self.preguntasGuardadasArray=[]
+    def guardarPrueba(self,e):
+        self.preguntaView.controls.clear()
+        self.preguntasGuardadas.controls.clear()
+        
+        self.newPrueba.setNombre(self.nombrePrueba.value)
+        a=dbPrueba()
+        a.guardar_en_base_de_datos(self.newPrueba)
+        self.preguntasGuardadas.controls.append(ft.Text(value="La pregunta se guardo",size=20))
         
     def AgregarOtraPregunta(self,e):
         pregunta=ft.TextField(value="(pregunta)",height=35)
@@ -34,12 +45,13 @@ class ViewAgregarPrueba:
         
     def prueba(self):
         self.preguntaView.controls.clear()
-        nombrePrueba=ft.TextField(value="Nombre prueba",width=150,height=35)
+        
         intefaz=ft.Row([ft.Column([
             ft.Row([
                 ft.TextButton(text="Agregar Otra pregunta", on_click=self.AgregarOtraPregunta),
-                ft.TextButton(text="Guardar Prueba"),
-                ft.Column([ft.Text(value="Nombre de purba: ",size=15),nombrePrueba]), 
+                ft.TextButton(text="Guardar Prueba",on_click=self.guardarPrueba),
+                ft.Text(value="Nombre de purba: ",size=15),
+                self.nombrePrueba
                 ]),
                 ft.Row([self.preguntasGuardadas],alignment=ft.MainAxisAlignment.CENTER,),
                 ft.Row([self.preguntaView],alignment=ft.MainAxisAlignment.CENTER,)
@@ -50,9 +62,12 @@ class ViewAgregarPrueba:
         return(intefaz)
     
     def guardarPregunta(self,e):
-        self.preguntaView.controls.clear()
+        
         data=e.control.data
-        """newPregunta=Pregunta(data(0),data[1],data[2],data[3])"""
+        newPregunta=Pregunta(data[0],data[1],data[2],data[3])
+        self.newPrueba.insertarPregunta(newPregunta)
+        print(data[0],data[1],data[2])
+        self.preguntaView.controls.clear()
         self.preguntasGuardadas.controls.append(
             ft.Container(
                 content=ft.Text(value= "pregunta "+str(len(self.preguntasGuardadas.controls)+1)+" guardada")

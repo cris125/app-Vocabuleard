@@ -1,7 +1,7 @@
 
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
-
+import variableGlobal
 import time 
 class ViewIniciarSesion:
     textFile=ft.TextField(value="(Numero De usuario)")
@@ -12,12 +12,13 @@ class ViewIniciarSesion:
         usuario=DbUsuario()
         userName=usuario.crearUsuario(self.textFile.value)
         print(userName)
-        
         if userName[2][0][3] == True:
+            variableGlobal.establecer_usuario_actual(self.textFile.value, admin=True)
             print("es admin")
             self.page.go("/pagInicioAdmin")
             
         else:
+            variableGlobal.establecer_usuario_actual(self.textFile.value, admin=False)
             self.page.go("/pagInicioUsuarios")
             print("no es admin")
         """

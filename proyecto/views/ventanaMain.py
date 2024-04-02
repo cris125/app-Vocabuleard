@@ -3,43 +3,65 @@ import flet as ft
 from .viewIniciarSesion import ViewIniciarSesion
 from .viewPrincipalAdmin import VentanaPrincipalAdmin
 from .viewAgregarPrueba import ViewAgregarPrueba
+from .agregarAdministradores import AgregarAdministradores
+import variableGlobal
+
 class VentanaMain:
     def iniciar(self):
         ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
+        ft.app()
         
     def route(self,route):
         self.page.views.clear()
         self.page.views.append( ft.View(
                 "/",[self.interfaz(),self.bienvenida()],
         ))
+        
         if  self.page.route == "/pagInicio":
             self.page.views.append(ft.View(
                     "/pagInicio",[self.interfaz(),self.pagInicio()],
         ))
-        if  self.page.route == "/pagInicioAdmin":
-            a=VentanaPrincipalAdmin()
-               
-            self.page.views.append(ft.View(
-                    "/pagInicioAdmin",[a.ventanaAdmin(self.page)],
-        )) 
-        if  self.page.route == "/pagInicioAdmin/verUsuarios":
-            a=VentanaPrincipalAdmin()
-              
-            self.page.views.append(ft.View(
-                    "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),a.pagUsuarios()],
-        ))
             
-        if  self.page.route == "/pagInicioAdmin/agregarPrueba":
-            a=VentanaPrincipalAdmin()
-            h=ViewAgregarPrueba(self.page)    
-            self.page.views.append(ft.View(
-                    "/pagInicioAdmin/agregarPrueba",[ft.Column([a.ventanaAdmin(self.page),h.prueba()]
-                                                               ,scroll=True,alignment=ft.alignment.center,)],
-        ))
+        if variableGlobal.esta_registrado() and variableGlobal.es_admin():
+
+                if  self.page.route == "/pagInicioAdmin":
+                        a=VentanaPrincipalAdmin()
+                        
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin",[a.ventanaAdmin(self.page)],
+                        )) 
+                if  self.page.route == "/pagInicioAdmin/verUsuarios":
+                        a=VentanaPrincipalAdmin()
+                        
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),a.pagUsuarios()],
+                        ))
+                
+                if  self.page.route == "/pagInicioAdmin/agregarPrueba":
+                        a=VentanaPrincipalAdmin()
+                        h=ViewAgregarPrueba(self.page)    
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/agregarPrueba",[ft.Column(
+                                        [a.ventanaAdmin(self.page), h.prueba()],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
+
+                if  self.page.route == "/pagInicioAdmin/agregarAdmin":
+                        a=VentanaPrincipalAdmin()
+                        h=AgregarAdministradores()    
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/agregarAdmin",[ft.Column(
+                                        [a.ventanaAdmin(self.page), h.ventanaAgreAdmin()],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
         if  self.page.route == "/pagInicioUsuarios":
-            self.page.views.append(ft.View(
-                    "/pagInicioAdmin",[self.interfaz(),self.pagInicio()],
-        ))    
+                 self.page.views.append(ft.View(
+                                "/pagInicioAdmin",[self.interfaz(),self.pagInicio()],
+                        ))    
 
             
         self.page.update()
