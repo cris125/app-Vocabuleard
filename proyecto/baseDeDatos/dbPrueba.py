@@ -47,29 +47,43 @@ class dbPrueba:
         except mysql.connector.Error as e:
             print("Error al guardar en la base de datos:", e)
 
-    def leer_desde_base_de_datos(self, prueba):
+    def leer_desde_base_de_datos(self):
         try:
             cursor = self.conexion.cursor()
-
             cursor.execute('SELECT * FROM pruebas')
             registros = cursor.fetchall()
-
+            prueba=[]
             for registro in registros:
-                print(f"Nombre: {registro[1]}")
-                print(f"Id: {registro[0]}")
-                print(f"Calificación: {registro[4]}")
-                preguntas = json.loads(registro[2])
-                for pregunta in preguntas:
-                    print(f"Pregunta: {pregunta['pregunta']}")
-                    print(f"Respuestas: {pregunta['respuestas']}")
-                    print(f"Respuesta correcta: {pregunta['respuestaCorrecta']}")
-                    print(f"Imagen: {pregunta['imagen']}")
-                    print("-" * 30)
-
+                preguntas = json.loads(registro[2])        
+                prueba.append((registro[0],registro[1],preguntas,registro[3],registro[4]))
+            cursor.close()
+            return(prueba)
+        except mysql.connector.Error as e:
+            print("Error al leer desde la base de datos:", e)
+            
+    
+                        
+    def eliminar_prueba(self,id):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('DELETE FROM pruebas WHERE id= %s',(id),)
             cursor.close()
         except mysql.connector.Error as e:
             print("Error al leer desde la base de datos:", e)
-
+            
+    def verificar_prueba(self, id):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute("SELECT COUNT(*) FROM pruebas WHERE id = %s", (id,))
+            resultado = cursor.fetchone()
+            return resultado[0] > 0
+        except mysql.connector.Error as e:
+            print(f"Error al verificar usuario: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()        
+            
     def get_last_id_prueba(self):
         last_id = 0
         try:

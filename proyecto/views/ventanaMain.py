@@ -5,6 +5,7 @@ from .viewPrincipalAdmin import VentanaPrincipalAdmin
 from .viewAgregarPrueba import ViewAgregarPrueba
 from .viewAgregarAdministradores import AgregarAdministradores
 from .viewEliminarUsuarios import EliminarUsuarios
+from .viewVerPruebas import VerPruebas
 import variableGlobal
 
 class VentanaMain:
@@ -50,7 +51,16 @@ class VentanaMain:
                                         alignment=ft.alignment.center
                                 )],
                         ))
-
+                if  self.page.route == "/pagInicioAdmin/verPruebas":
+                        a=VentanaPrincipalAdmin()
+                        h=VerPruebas()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/verPruebas",[ft.Column(
+                                        [a.ventanaAdmin(self.page), h.pruebas(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
                 if  self.page.route == "/pagInicioAdmin/agregarAdmin":
                         a=VentanaPrincipalAdmin()
                         h=AgregarAdministradores()    
