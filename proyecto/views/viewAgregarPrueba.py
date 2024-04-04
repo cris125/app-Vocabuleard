@@ -2,6 +2,7 @@ import flet as ft
 from models.Prueba import Prueba
 from models.Pregunta import Pregunta
 from baseDeDatos.dbPrueba import dbPrueba
+import time
 class ViewAgregarPrueba:
     def __init__(self,page):
         self.page=page
@@ -16,9 +17,12 @@ class ViewAgregarPrueba:
         self.preguntasGuardadas.controls.clear()
         
         self.newPrueba.setNombre(self.nombrePrueba.value)
+
         a=dbPrueba()
         a.guardar_en_base_de_datos(self.newPrueba)
         self.preguntasGuardadas.controls.append(ft.Text(value="La pregunta se guardo",size=20))
+        time.sleep(2)
+        self.page.go("/pagInicioAdmin")
         
     def AgregarOtraPregunta(self,e):
         pregunta=ft.TextField(value="(pregunta)",height=35)

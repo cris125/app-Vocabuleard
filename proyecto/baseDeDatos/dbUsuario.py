@@ -43,7 +43,10 @@ class DbUsuario:
                 SELECT * FROM usuarios WHERE userName = %s 
             ''', (usuarioStr,))
             usuario = cursor.fetchall()
-            return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]))
+            if len(usuario)>0 :
+                return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]))
+            else:
+                return(None)
         except mysql.connector.Error as e:
             print(f"Error al ver tabla de usuarios: {e}")
         finally:

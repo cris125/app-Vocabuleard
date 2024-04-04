@@ -9,7 +9,8 @@ import variableGlobal
 
 class VentanaMain:
     def iniciar(self):
-        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
+        """ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)"""
+        ft.app(target=self.main)
         ft.app()
         
     def route(self,route):
