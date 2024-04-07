@@ -63,13 +63,16 @@ class dbPrueba:
             
     
                         
-    def eliminar_prueba(self,id):
+    def eliminar_prueba(self, id):
         try:
             cursor = self.conexion.cursor()
-            cursor.execute('DELETE FROM pruebas WHERE id= %s',(id),)
-            cursor.close()
+            cursor.execute('DELETE FROM pruebas WHERE id = %s', (id,))
+            self.conexion.commit()  # Confirmar los cambios
         except mysql.connector.Error as e:
-            print("Error al leer desde la base de datos:", e)
+            print("Error al eliminar desde la base de datos:", e)
+        finally:
+            if cursor:
+                cursor.close()
             
     def verificar_prueba(self, id):
         try:
@@ -82,7 +85,7 @@ class dbPrueba:
             return False
         finally:
             if cursor:
-                cursor.close()        
+                cursor.close()       
             
     def get_last_id_prueba(self):
         last_id = 0

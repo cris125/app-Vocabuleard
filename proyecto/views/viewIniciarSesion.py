@@ -16,10 +16,9 @@ class ViewIniciarSesion:
             variableGlobal.establecer_usuario_actual(self.textFile.value, admin=True)
             print("es admin")
             self.page.go("/pagInicioAdmin")
-            
         else:
             variableGlobal.establecer_usuario_actual(self.textFile.value, admin=False)
-            self.page.go("/pagInicioUsuarios")
+            self.page.go("/pagEstudioante")
             print("no es admin")
         """
         para hacer una prueba

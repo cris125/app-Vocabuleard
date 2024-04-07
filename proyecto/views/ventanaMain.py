@@ -6,6 +6,8 @@ from .viewAgregarPrueba import ViewAgregarPrueba
 from .viewAgregarAdministradores import AgregarAdministradores
 from .viewEliminarUsuarios import EliminarUsuarios
 from .viewVerPruebas import VerPruebas
+from .viewEliminarPrueba import EliminarPrueba
+from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 import variableGlobal
 
 class VentanaMain:
@@ -82,6 +84,27 @@ class VentanaMain:
                                         alignment=ft.alignment.center
                                 )],
                         ))
+                if  self.page.route == "/pagInicioAdmin/eliminarPrueba":
+                        a=VentanaPrincipalAdmin()
+                        h=EliminarPrueba()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/eliminarPrueba",[ft.Column(
+                                        [a.ventanaAdmin(self.page), h.ventanaEliminarPrueba(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
+        if variableGlobal.esta_registrado() and (not variableGlobal.es_admin()):
+                if  self.page.route == "/pagEstudioante":
+                        a=VentanaPrincipalEstudiante()
+                          
+                        self.page.views.append(ft.View(
+                                "/pagEstudioante",[ft.Column(
+                                        [a.ventanaEstudiante(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))      
         if  self.page.route == "/pagInicioUsuarios":
                  self.page.views.append(ft.View(
                                 "/pagInicioAdmin",[self.interfaz(),self.pagInicio()],

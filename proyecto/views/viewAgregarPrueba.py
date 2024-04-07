@@ -55,6 +55,7 @@ class ViewAgregarPrueba:
             ft.Row([
                 ft.TextButton(text="Agregar Otra pregunta", on_click=self.AgregarOtraPregunta),
                 ft.TextButton(text="Guardar Prueba",on_click=self.guardarPrueba),
+                ft.TextButton(text="Eliminar Pruebas (Segun id)",on_click=lambda _: self.page.go("/pagInicioAdmin/eliminarPrueba")),
                 ft.Text(value="Nombre de purba: ",size=15),
                 self.nombrePrueba
                 ]),
