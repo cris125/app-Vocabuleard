@@ -122,7 +122,8 @@ class VentanaMain:
             return(res) 
 
     def bienvenida(self):
-            return(ft.Row([ft.Text(value="Bienvenido de vuelta", text_align=ft.TextAlign.CENTER, width=500,size=30)],alignment=ft.MainAxisAlignment.CENTER,))
+            return(ft.Row([ft.Text(value="Bienvenido de vuelta", text_align=ft.TextAlign.CENTER, width=500,size=30),
+                          ],alignment=ft.MainAxisAlignment.CENTER,))
 
     
 
