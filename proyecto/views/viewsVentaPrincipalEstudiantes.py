@@ -36,24 +36,23 @@ class VentanaPrincipalEstudiante:
 
     def pasarPreguntas(self, pregunta):
         
+        
         def sigPregunta(e):
             pass
         
         def verrificarResp(e):
-            hacerPregunta()
-            e.control.bgcolor = "blue" if e.control.data == "true" else "red"
-            e.control.update()
+            resp={"a":a,"b":b,"c":c,"d":d}
+            boton=resp[e.control.data[1]]
+            boton.bgcolor=ft.colors.BLUE_GREY
+            resp.pop(e.control.data[1])
+            for botones in  resp.values():
+                botones.bgcolor=ft.colors.AMBER
+            respuesta.append((pregunta["respuestaCorrecta"] == e.control.data[0]))
+            print(respuesta)
             self.page.update()
-        def hacerPregunta():
-            
-            Preg=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER ,width=self.page.width)
-            Preg.controls.append(ft.Text(value=pregunta["pregunta"]))
-            for i in range(4):
-                Preg.controls.append(ft.ElevatedButton(text=respuestas[i],data=respuestas[i],on_click=verrificarResp))
-            Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta",on_click=sigPregunta))
-            Preg.controls.append(ft.Text(value=pregunta["respuestaCorrecta"]))
-            self.page.update()
-            return(Preg)
+
+
+          
         
         self.inter.controls.clear()
         
@@ -62,8 +61,20 @@ class VentanaPrincipalEstudiante:
         self.inter.controls.append(temporizador)
         
         respuestas=(pregunta["respuestas"]).split(",")
-        self.inter.controls.append(hacerPregunta())
-        
+       
+        respuesta=[]
+        a=ft.ElevatedButton(text=respuestas[0],data=(respuestas[0],"a"),on_click=verrificarResp)
+        b=ft.ElevatedButton(text=respuestas[1],data=(respuestas[1],"b"),on_click=verrificarResp)
+        c=ft.ElevatedButton(text=respuestas[2],data=(respuestas[2],"c"),on_click=verrificarResp)
+        d=ft.ElevatedButton(text=respuestas[3],data=(respuestas[3],"d"),on_click=verrificarResp)
+
+        Preg=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER ,width=self.page.width)
+        Preg.controls.append(ft.Text(value=pregunta["pregunta"]))
+        Preg.controls.extend([a,b,c,d])
+        Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta",on_click=sigPregunta))
+        Preg.controls.append(ft.Text(value=pregunta["respuestaCorrecta"]))
+        self.inter.controls.append(Preg)
+
         for i in range(10):
             time.sleep(1) 
             tiempo.value= str(int(tiempo.value)+1) 
