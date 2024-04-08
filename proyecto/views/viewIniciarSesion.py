@@ -8,7 +8,9 @@ class ViewIniciarSesion:
     contador=ft.TextField(value="0")
 
     def validarUsuario(self,e):
-    
+        e.control.disabled=True
+        self.page.update()
+        
         usuario=DbUsuario()
         userName=usuario.crearUsuario(self.textFile.value)
         print(userName)

@@ -22,6 +22,7 @@ class VentanaPrincipalEstudiante:
 
 
     def hacerPrueba(self, e ):
+        self.calificaion=0
         self.inter.controls.clear()
         info=e.control.data
         preguntas=info[2]
@@ -35,27 +36,30 @@ class VentanaPrincipalEstudiante:
         self.page.update()
 
     def pasarPreguntas(self, pregunta):
-        
+
         
         def sigPregunta(e):
-            pass
+            resp={"a":a,"b":b,"c":c,"d":d}
+            timepoSigPerg[0]=False
+            for boton in  resp.values():
+                if boton.bgcolor==ft.colors.BLUE_GREY:
+                    respuesta.append((str(pregunta["respuestaCorrecta"]).strip() == str(boton.text).strip()))
+                    print(respuesta)
+                    print(boton)
+            self.page.update()
+            
         
         def verrificarResp(e):
             resp={"a":a,"b":b,"c":c,"d":d}
             boton=resp[e.control.data[1]]
             boton.bgcolor=ft.colors.BLUE_GREY
             resp.pop(e.control.data[1])
-            for botones in  resp.values():
-                botones.bgcolor=ft.colors.AMBER
-            respuesta.append((pregunta["respuestaCorrecta"] == e.control.data[0]))
-            print(respuesta)
+            for boton in  resp.values():
+                boton.bgcolor=ft.colors.WHITE
             self.page.update()
 
-
-          
-        
         self.inter.controls.clear()
-        
+        timepoSigPerg=[True]
         tiempo=ft.Text(value="0")
         temporizador=ft.Container(ft.Row([ft.Container(content=tiempo,width=150,height=50,padding=5,)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
         self.inter.controls.append(temporizador)
@@ -71,15 +75,18 @@ class VentanaPrincipalEstudiante:
         Preg=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER ,width=self.page.width)
         Preg.controls.append(ft.Text(value=pregunta["pregunta"]))
         Preg.controls.extend([a,b,c,d])
-        Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta",on_click=sigPregunta))
+        Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta" ,on_click=sigPregunta))
         Preg.controls.append(ft.Text(value=pregunta["respuestaCorrecta"]))
         self.inter.controls.append(Preg)
-
+        
+        
         for i in range(10):
             time.sleep(1) 
-            tiempo.value= str(int(tiempo.value)+1) 
+            tiempo.value= str(int(tiempo.value)+1)
+            if timepoSigPerg[0]==False:
+                return 
             self.page.update()
-        
+
         
 
     def cuadroPrueba(self,info):
