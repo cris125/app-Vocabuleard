@@ -2,7 +2,7 @@
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
 import variableGlobal
-import time 
+
 class ViewIniciarSesion:
     textFile=ft.TextField(value="(Numero De usuario)")
     contador=ft.TextField(value="0")
@@ -20,15 +20,7 @@ class ViewIniciarSesion:
             variableGlobal.establecer_usuario_actual(self.textFile.value, admin=False)
             self.page.go("/pagEstudioante")
             print("no es admin")
-        """
-        para hacer una prueba
-        page=e.control.data 
-        page.clean()
-        page.add(self.contador)
-        for i in range(30):
-            self.contador.value=str(int(self.contador.value)+1)
-            time.sleep(1.2)
-            page.update()"""
+        
     
     def pestañaInicio(self,page):
         self.page=page

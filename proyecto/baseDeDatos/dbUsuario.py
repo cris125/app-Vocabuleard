@@ -183,6 +183,24 @@ class DbUsuario:
         finally:
             if cursor:
                 cursor.close()
+                
+    def actualizar_prueba(self, usuario_id: int, nuevo_valor_prueba: str):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                UPDATE account 
+                SET prueba = %s
+                WHERE id = (
+                    SELECT id_account FROM usuarios WHERE id = %s
+                )
+            ''', (nuevo_valor_prueba, usuario_id))
+            self.conexion.commit()
+        except mysql.connector.Error as e:
+            print(f"Error al modificar prueba: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+
 
 # Ejemplo de uso
 
