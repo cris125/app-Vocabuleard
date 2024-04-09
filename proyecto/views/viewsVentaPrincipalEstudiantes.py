@@ -1,3 +1,4 @@
+import json
 import flet as ft
 from baseDeDatos.dbPrueba import dbPrueba
 from baseDeDatos.dbUsuario import DbUsuario
@@ -22,17 +23,29 @@ class VentanaPrincipalEstudiante:
 
 
     def hacerPrueba(self, e ):
-        self.calificaion=0
         self.inter.controls.clear()
         info=e.control.data
         preguntas=info[2]
+
+    
+        dbUsua=DbUsuario()
+        ususario=dbUsua.getUser(variableGlobal.usuario_actual.nombre)
+        pruebas=ususario[2][0][1]
         
-        a=DbUsuario()
-        ususario=a.getUser(variableGlobal.usuario_actual.nombre)
+        self.calificaionPrueba=[]
         for i in preguntas:
-            self.pasarPreguntas(i)
-        self.intefazEstudiantes() 
-        print("xakskasjdjsadsa")   
+            self.calificaionPrueba.append(self.pasarPreguntas(i))
+
+        if pruebas is None:
+            pruebasDic={info[1]:self.calificaionPrueba.count(True)}
+            pruebasStr=json.dumps(pruebasDic)
+            dbUsua.actualizar_prueba(ususario[0],pruebasStr)
+        else:
+            pruebasDic=json.loads(pruebas)
+            pruebasDic.update({info[1]:self.calificaionPrueba.count(True)})
+            pruebasStr=json.dumps(pruebasDic)
+            dbUsua.actualizar_prueba(ususario[0],pruebasStr)
+        self.intefazEstudiantes()  
         self.page.update()
 
     def pasarPreguntas(self, pregunta):
@@ -43,9 +56,8 @@ class VentanaPrincipalEstudiante:
             timepoSigPerg[0]=False
             for boton in  resp.values():
                 if boton.bgcolor==ft.colors.BLUE_GREY:
-                    respuesta.append((str(pregunta["respuestaCorrecta"]).strip() == str(boton.text).strip()))
-                    print(respuesta)
-                    print(boton)
+                    respuesta.clear()
+                    respuesta.append((str(pregunta["respuestaCorrecta"]).strip() == str(boton.text).strip()))       
             self.page.update()
             
         
@@ -84,21 +96,31 @@ class VentanaPrincipalEstudiante:
             time.sleep(1) 
             tiempo.value= str(int(tiempo.value)+1)
             if timepoSigPerg[0]==False:
-                return 
+                return (respuesta[0])
             self.page.update()
+            
+        return (respuesta[0])
 
         
 
     def cuadroPrueba(self,info):
-        cuadro=ft.Container(content=ft.ElevatedButton(text=str(info[1])+"(hacer  prueba)", data=info ,on_click=self.hacerPrueba), bgcolor=ft.colors.AMBER_100)
-        self.contenido.controls.append(cuadro)
-        
-            
+        contbtn=ft.Container(
+            content=ft.ElevatedButton(text=str(info[1])+"(hacer  prueba)", data=info ,on_click=self.hacerPrueba)
+            ,width=150,height=150,bgcolor=ft.colors.BLUE_500)
+        return(contbtn)
+       
     def verPruebas(self,e):
         a=dbPrueba()
         pruebas=a.leer_desde_base_de_datos()
+        cuadro=ft.GridView(expand=1,
+                runs_count=5,
+                max_extent=300,
+                child_aspect_ratio=1.0,
+                spacing=5,
+                run_spacing=5,)
         for prueba in pruebas:
-            self.cuadroPrueba(prueba)
+            cuadro.controls.append(self.cuadroPrueba(prueba))
+        self.contenido.controls.append(cuadro)    
         self.page.update()
 
     def ventanaEstudiante(self,page:ft.Page):
