@@ -6,7 +6,7 @@ import time
 class ViewAgregarPrueba:
     def __init__(self,page):
         self.page=page
-        self.nombrePrueba=ft.TextField(value="Nombre prueba",width=150,height=35)
+        self.nombrePrueba=ft.TextField(value="Nombre prueba",width=300,height=60)
         self.newPrueba=Prueba()
         self.preguntaView=ft.Row(alignment=ft.MainAxisAlignment.CENTER,width= self.page.width)
         self.preguntasGuardadas = ft.Row(scroll=True)
@@ -25,24 +25,24 @@ class ViewAgregarPrueba:
         self.page.go("/pagInicioAdmin")
         
     def AgregarOtraPregunta(self,e):
-        pregunta=ft.TextField(value="(pregunta)",height=35)
-        imagen=ft.TextField(value="(imagen)",height=35)
-        a=ft.TextField(value="Respuestas A",height=35)
-        b= ft.TextField(value="Respuestas B",height=35)
-        c=ft.TextField(value="Respuestas C",height=35)
-        d=ft.TextField(value="Respuestas D",height=35)
-        respuestaCorrecta=ft.TextField(value="Respuestas D",height=35)
+        self.pregunta=ft.TextField(value="(pregunta)")
+        self.imagen=ft.TextField(value="(imagen)")
+        self.a=ft.TextField(value="Respuestas A")
+        self.b= ft.TextField(value="Respuestas B")
+        self.c=ft.TextField(value="Respuestas C")
+        self.d=ft.TextField(value="Respuestas D")
+        self.respuestaCorrecta=ft.TextField(value="Respuestas D")
         
         continer=ft.Container(content=ft.Column(
             [           ft.Text(value="Pregunta:",size=20),
-                        pregunta,
+                        self.pregunta,
                         ft.Text(value="imagen:"),
-                        imagen,
+                        self.imagen,
                         ft.Text(value="Respuestas:"),
-                        a, b,c,d,
+                        self.a, self.b,self.c,self.d,
                         ft.Text(value="Respuesta Correcta:"),
-                        respuestaCorrecta,
-                        ft.TextButton(text="Agregar Pregunta",data=(pregunta.value,[a.value,b.value,c.value,d.value],respuestaCorrecta.value,imagen.value),on_click=self.guardarPregunta)
+                        self.respuestaCorrecta,
+                        ft.TextButton(text="Guardar Pregunta",on_click=self.guardarPregunta)
              ],scroll=True,width= self.page.width,horizontal_alignment=ft.CrossAxisAlignment.CENTER)
                 ,border=ft.border.all(2, ft.colors.BLACK), border_radius=5,padding=5,width=500,height=450)
         self.preguntaView.controls.append(continer)
@@ -69,10 +69,11 @@ class ViewAgregarPrueba:
     
     def guardarPregunta(self,e):
         
-        data=e.control.data
-        newPregunta=Pregunta(data[0],data[1],data[2],data[3])
+        newPregunta=Pregunta(self.pregunta.value,
+                             [self.a.value , self.b.value , self.c.value , self.d.value],
+                             self.respuestaCorrecta.value,
+                             self.imagen.value)
         self.newPrueba.insertarPregunta(newPregunta)
-        print(data[0],data[1],data[2])
         self.preguntaView.controls.clear()
         self.preguntasGuardadas.controls.append(
             ft.Container(
