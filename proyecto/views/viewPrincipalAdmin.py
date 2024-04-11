@@ -1,11 +1,7 @@
 import flet as ft
-from .viewVerUsuarios import ViewVerUsuarios
 import variableGlobal
 class VentanaPrincipalAdmin:
-    def pagUsuarios(self):
-            a=ViewVerUsuarios()
-            res=a.main()
-            return(res)
+   
         
     def salir(self,e):
         variableGlobal.logOut()

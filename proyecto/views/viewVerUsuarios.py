@@ -3,22 +3,20 @@ from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
 
 class ViewVerUsuarios:
-
+    def __init__(self) -> None:
+        self.contenedor=ft.Row(alignment=ft.MainAxisAlignment.CENTER,)
     def consultarUsuarios(self):
         
         db=DbUsuario()
         listaUsuarios=[]
         for i in db.ver_tabla_usuario():
-            infoUsuario=[]
-            for x in range (len(i)):
-                if x==2:
-                    infoUsuario.append(db.ver_tabla_account(i[x]))
-                else:
-                    infoUsuario.append(i[x])
-            listaUsuarios.append(infoUsuario)  
+            usuario=db.getUser(i[1])
+            # usuario[2] == algo mejor 
+            listaUsuarios.append(usuario)
+              
         return(listaUsuarios)
         
-    def main(self):
+    def ventanaVerUsuario(self):
         usuarios=self.consultarUsuarios()
         row=[]
         for usuario in usuarios:
@@ -38,8 +36,6 @@ class ViewVerUsuarios:
                 ft.DataColumn(ft.Text("User Name")),
                 ft.DataColumn(ft.Text("Acount"), numeric=True),
             ],rows=row,
-            )],alignment=ft.MainAxisAlignment.CENTER,)
-               
-            
+            )],alignment=ft.MainAxisAlignment.CENTER,)  
         ])
             

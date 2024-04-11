@@ -13,12 +13,16 @@ class VentanaPrincipalEstudiante:
            
         self.contenido=ft.Row()
         self.inter.controls.clear()
-        self.inter.controls.extend([ft.Container(ft.Row([
-            ft.Container(content=ft.TextButton(text="Hacer pruebas",on_click=self.verPruebas)),
-            ft.Container(content=ft.TextButton(text="Ver vocabulario")),
-            ft.Container(content=ft.TextButton(text="Salir",on_click=salir )),
-            ],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
-        ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15),self.contenido])
+        self.inter.controls.extend(
+            [
+            ft.Container(ft.Row([
+                ft.Container(content=ft.TextButton(text="Hacer pruebas",on_click=self.verPruebas)),
+                ft.Container(content=ft.TextButton(text="Ver vocabulario")),
+                ft.Container(content=ft.TextButton(text="Salir",on_click=salir )),
+                ],alignment=ft.MainAxisAlignment.SPACE_EVENLY)
+            ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15),
+            self.contenido
+                ])
         
 
 
@@ -125,7 +129,7 @@ class VentanaPrincipalEstudiante:
 
     def ventanaEstudiante(self,page:ft.Page):
         self.page=page 
-        self.inter=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER ,width=self.page.width)
+        self.inter=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER )
         self.intefazEstudiantes()
         return(self.inter)
 

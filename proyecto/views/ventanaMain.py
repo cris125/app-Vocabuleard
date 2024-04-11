@@ -8,6 +8,7 @@ from .viewEliminarUsuarios import EliminarUsuarios
 from .viewVerPruebas import VerPruebas
 from .viewEliminarPrueba import EliminarPrueba
 from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
+from .viewVerUsuarios import ViewVerUsuarios
 import variableGlobal
 
 class VentanaMain:
@@ -38,9 +39,9 @@ class VentanaMain:
                         )) 
                 if  self.page.route == "/pagInicioAdmin/verUsuarios":
                         a=VentanaPrincipalAdmin()
-                        
+                        h=ViewVerUsuarios()
                         self.page.views.append(ft.View(
-                                "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),a.pagUsuarios()],
+                                "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),h.ventanaVerUsuarios()],
                         ))
                 
                 if  self.page.route == "/pagInicioAdmin/agregarPrueba":
