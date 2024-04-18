@@ -10,8 +10,6 @@ class VentanaPrincipalAdmin:
     def ventanaAdmin(self,page):
         self.page=page
         self.verUsuarios=[]
-        
-          
 
         a=ft.Container(ft.Row([
             ft.Container(content=ft.TextButton(text="Ver Usuarios",on_click=lambda _: self.page.go("/pagInicioAdmin/verUsuarios"))),

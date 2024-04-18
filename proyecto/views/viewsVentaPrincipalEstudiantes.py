@@ -24,8 +24,6 @@ class VentanaPrincipalEstudiante:
             self.contenido
                 ])
         
-
-
     def hacerPrueba(self, e ):
         self.inter.controls.clear()
         info=e.control.data
@@ -76,8 +74,12 @@ class VentanaPrincipalEstudiante:
 
         self.inter.controls.clear()
         timepoSigPerg=[True]
-        tiempo=ft.Text(value="0")
-        temporizador=ft.Container(ft.Row([ft.Container(content=tiempo,width=150,height=50,padding=5,)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
+        tiempo=ft.Text(value="0",size=25)
+        temporizador=ft.Container(ft.Row([
+            ft.Container(content=ft.Row([
+                            ft.Text(value="Tiempo restante para pregunta:",size=25),
+                            tiempo,
+                            ft.Text(value="segundos de 60",size=25)]),width=150,height=50,padding=5,)]),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
         self.inter.controls.append(temporizador)
         
         respuestas=(pregunta["respuestas"]).split(",")
@@ -92,12 +94,11 @@ class VentanaPrincipalEstudiante:
         Preg.controls.append(ft.Text(value=pregunta["pregunta"]))
         Preg.controls.extend([a,b,c,d])
         Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta" ,on_click=sigPregunta))
-        Preg.controls.append(ft.Text(value=pregunta["respuestaCorrecta"]))
         self.inter.controls.append(Preg)
         
         
-        for i in range(10):
-            time.sleep(1) 
+        for i in range(60):
+            time.sleep(1.2) 
             tiempo.value= str(int(tiempo.value)+1)
             if timepoSigPerg[0]==False:
                 return (respuesta[0])
