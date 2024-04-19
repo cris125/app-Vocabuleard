@@ -39,14 +39,20 @@ class VentanaPrincipalEstudiante:
             self.calificaionPrueba.append(self.pasarPreguntas(i))
 
         if pruebas is None:
-            pruebasDic={info[1]:self.calificaionPrueba.count(True)}
+            pruebasDic={info[1]:[self.calificaionPrueba.count(True)]}
             pruebasStr=json.dumps(pruebasDic)
             dbUsua.actualizar_prueba(ususario[0],pruebasStr)
         else:
             pruebasDic=json.loads(pruebas)
-            pruebasDic.update({info[1]:self.calificaionPrueba.count(True)})
+            
+            if info[1] in pruebasDic:
+                pruebasDic[info[1]].append(self.calificaionPrueba.count(True))
+            else:
+                pruebasDic.update({info[1]:[self.calificaionPrueba.count(True)]})
+                
             pruebasStr=json.dumps(pruebasDic)
             dbUsua.actualizar_prueba(ususario[0],pruebasStr)
+            
         self.intefazEstudiantes()  
         self.page.update()
 
@@ -64,6 +70,8 @@ class VentanaPrincipalEstudiante:
             
         
         def verrificarResp(e):
+            sigPregun.disabled=False
+            
             resp={"a":a,"b":b,"c":c,"d":d}
             boton=resp[e.control.data[1]]
             boton.bgcolor=ft.colors.BLUE_GREY
@@ -89,11 +97,11 @@ class VentanaPrincipalEstudiante:
         b=ft.ElevatedButton(text=respuestas[1],data=(respuestas[1],"b"),on_click=verrificarResp)
         c=ft.ElevatedButton(text=respuestas[2],data=(respuestas[2],"c"),on_click=verrificarResp)
         d=ft.ElevatedButton(text=respuestas[3],data=(respuestas[3],"d"),on_click=verrificarResp)
-
+        sigPregun=ft.ElevatedButton(text="siguiente pregunta" ,on_click=sigPregunta,disabled=True)
         Preg=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER ,width=self.page.width)
         Preg.controls.append(ft.Text(value=pregunta["pregunta"]))
         Preg.controls.extend([a,b,c,d])
-        Preg.controls.append(ft.ElevatedButton(text="siguiente pregunta" ,on_click=sigPregunta))
+        Preg.controls.append(sigPregun)
         self.inter.controls.append(Preg)
         
         
@@ -101,7 +109,10 @@ class VentanaPrincipalEstudiante:
             time.sleep(1.2) 
             tiempo.value= str(int(tiempo.value)+1)
             if timepoSigPerg[0]==False:
-                return (respuesta[0])
+                if len(respuesta)>0:
+                    return (respuesta[0])
+                else:
+                    return (False)
             self.page.update()
             
         return (respuesta[0])
