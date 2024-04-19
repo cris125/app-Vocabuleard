@@ -8,13 +8,10 @@ class ViewVerUsuarios:
     def consultarUsuarios(self):
         
         db=DbUsuario()
-        listaUsuarios=[]
-        for i in db.ver_tabla_usuario():
-            usuario=db.getUser(i[1])
-            # usuario[2] == algo mejor 
-            listaUsuarios.append(usuario)
-              
-        return(listaUsuarios)
+        usuario=db.ver_tabla_usuario()
+        account=db.ver_account()
+        retur=[(usuario[i][0],usuario[i][1],account[i]) for i in range(len(usuario))]
+        return(retur)
         
     def ventanaVerUsuario(self):
         usuarios=self.consultarUsuarios()
@@ -37,5 +34,5 @@ class ViewVerUsuarios:
                 ft.DataColumn(ft.Text("Acount"), numeric=True),
             ],rows=row,
             )],alignment=ft.MainAxisAlignment.CENTER,)  
-        ])
+        ],scroll=True)
             

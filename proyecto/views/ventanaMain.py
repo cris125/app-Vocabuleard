@@ -41,7 +41,7 @@ class VentanaMain:
                         a=VentanaPrincipalAdmin()
                         h=ViewVerUsuarios()
                         self.page.views.append(ft.View(
-                                "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),h.ventanaVerUsuarios()],
+                                "/pagInicioAdmin/verUsuarios",[a.ventanaAdmin(self.page),h.ventanaVerUsuario()],
                         ))
                 
                 if  self.page.route == "/pagInicioAdmin/agregarPrueba":
