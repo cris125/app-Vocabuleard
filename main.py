@@ -10,6 +10,6 @@ a=Main()
 
 
 # si el programa se descontrola
-"""xd=ElimTablas()
-xd.drop_table_usuario()
-xd.drop_table_account()"""
+"""a=ElimTablas()
+a.drop_table_usuario()
+a.drop_table_account()"""
