@@ -18,14 +18,17 @@ class VentanaPrincipalEstudiante:
             ft.Container(ft.Row([
                 ft.Container(content=ft.TextButton(text="Hacer pruebas",on_click=self.verPruebas)),
                 ft.Container(content=ft.TextButton(text="Ver vocabulario")),
+                ft.Container(content=ft.TextButton(text="Ejercicios")),
                 ft.Container(content=ft.TextButton(text="Salir",on_click=salir )),
                 ],alignment=ft.MainAxisAlignment.SPACE_EVENLY)
             ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15),
             self.contenido
                 ])
         
+        
     def hacerPrueba(self, e ):
         self.inter.controls.clear()
+        self.numPregunta=ft.Text(value="1 ",size=25)
         info=e.control.data
         preguntas=info[2]
 
@@ -37,6 +40,7 @@ class VentanaPrincipalEstudiante:
         self.calificaionPrueba=[]
         for i in preguntas:
             self.calificaionPrueba.append(self.pasarPreguntas(i))
+            self.numPregunta.value=str(int(self.numPregunta.value)+1)
 
         if pruebas is None:
             pruebasDic={info[1]:[self.calificaionPrueba.count(True)]}
@@ -53,9 +57,15 @@ class VentanaPrincipalEstudiante:
             pruebasStr=json.dumps(pruebasDic)
 
             dbUsua.actualizar_prueba(ususario[0],pruebasStr)
-            dbUsua.modify_promNota(ususario[0],(len(self.calificaionPrueba)+int(ususario[3]))/2)
-        self.intefazEstudiantes()  
-        self.page.update()
+            if ususario[3] != None:
+                
+                promedio=float(ususario[3])+len(self.calificaionPrueba)/2
+                print(promedio)
+                dbUsua.modify_promNota(ususario[0],promedio)
+            else:
+                dbUsua.modify_promNota(ususario[0],(str(len(self.calificaionPrueba))))
+            
+        self.page.go("/pagEstudioante")
 
 
     def pasarPreguntas(self, pregunta):
@@ -85,11 +95,22 @@ class VentanaPrincipalEstudiante:
         self.inter.controls.clear()
         timepoSigPerg=[True]
         tiempo=ft.Text(value="0",size=25)
+        
+        
         temporizador=ft.Container(ft.Row([
             ft.Container(content=ft.Row([
-                            ft.Text(value="Tiempo restante para pregunta:",size=25),
-                            tiempo,
-                            ft.Text(value="segundos de 60",size=25)]),width=150,height=50,padding=5,)]),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
+                ft.Row(
+                    [ft.Text(value="Tiempo restante para pregunta:",size=25),
+                    tiempo,
+                    ft.Text(value="segundos de 60",size=25)]
+                ),
+                ft.Row(
+                    [ft.Text(value=" pregunta No°",size=25),self.numPregunta]
+                )
+            ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN),width=150,height=50,padding=5,)])
+                                  
+        ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
+        
         self.inter.controls.append(temporizador)
         
         respuestas=(pregunta["respuestas"]).split(",")
@@ -127,7 +148,7 @@ class VentanaPrincipalEstudiante:
             ,width=150,height=150,bgcolor=ft.colors.BLUE_500)
         return(contbtn)
        
-    def verPruebas(self,e):
+    def verPruebas(self):
         a=dbPrueba()
         pruebas=a.leer_desde_base_de_datos()
         cuadro=ft.GridView(expand=1,
@@ -145,6 +166,7 @@ class VentanaPrincipalEstudiante:
         self.page=page 
         self.inter=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER )
         self.intefazEstudiantes()
+        self.verPruebas()
         return(self.inter)
 
 

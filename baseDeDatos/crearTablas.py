@@ -42,16 +42,10 @@ class CrearTablas():
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     userName VARCHAR(255),
                     id_Account INT,
-                    promNota INT
+                    promNota VARCHAR(255)
                 )
             ''')
             self.conexion.commit()
-            print("La tabla 'usuarios' se creó correctamente.")
-        except Exception as e:
-            print(f"Error al crear la tabla: {str(e)}")
-
-            
-            
         except mysql.connector.Error as e:
             print("Error al crear la tabla de usuarios:", e)
         finally:

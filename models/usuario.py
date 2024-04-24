@@ -14,7 +14,7 @@ class Usuario():
         self.account = Account()
         self.id_account = self.account.id
         self.userName = userName
-        self.promNota=0
+        self.promNota= None
     def __str__(self) -> str:
         return str(self.userName)
 

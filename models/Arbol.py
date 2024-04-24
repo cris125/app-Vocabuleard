@@ -23,11 +23,11 @@ class Arbol():
             self.insertarRec(valor, self.nodoRaiz)
 
     def insertarRec(self, valor, nodo):
-        if valor > nodo.valor and nodo.nodoDerecha is None:
+        if valor >= nodo.valor and nodo.nodoDerecha is None:
             nodo.nodoDerecha = Nodo(valor)
         elif valor < nodo.valor and nodo.nodoIzquierda is None:
             nodo.nodoIzquierda = Nodo(valor)
-        elif valor > nodo.valor:
+        elif valor >= nodo.valor:
             self.insertarRec(valor, nodo.nodoDerecha)
         elif valor < nodo.valor:
             self.insertarRec(valor, nodo.nodoIzquierda)
@@ -206,4 +206,3 @@ class Arbol():
         matriz_transpuesta =arreglarMatriz() 
         return agregarLineas(matriz_transpuesta)
 
-a = Arbol()

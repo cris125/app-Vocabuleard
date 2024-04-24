@@ -68,6 +68,10 @@ class ViewAgregarPrueba:
         return(intefaz)
     
     def guardarPregunta(self,e):
+        print((self.pregunta.value,
+                             [self.a.value , self.b.value , self.c.value , self.d.value],
+                             self.respuestaCorrecta.value,
+                             self.imagen.value))
         
         newPregunta=Pregunta(self.pregunta.value,
                              [self.a.value , self.b.value , self.c.value , self.d.value],

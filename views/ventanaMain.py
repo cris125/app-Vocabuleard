@@ -10,12 +10,13 @@ from .viewEliminarPrueba import EliminarPrueba
 from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 from .viewVerUsuarios import ViewVerUsuarios
 from .viewVerArbolNotas import ArbolNotas
+from .viewInterfazUsuario import InterfazUsuario
 import variableGlobal
 
 class VentanaMain:
     def iniciar(self):
-        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
-        """ft.app(target=self.main)"""
+        """ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)"""
+        ft.app(target=self.main)
 
         
     def route(self,route):
@@ -110,14 +111,26 @@ class VentanaMain:
         if variableGlobal.esta_registrado() and (not variableGlobal.es_admin()):
                 if  self.page.route == "/pagEstudioante":
                         a=VentanaPrincipalEstudiante()
-                          
+                        h=InterfazUsuario()
                         self.page.views.append(ft.View(
                                 "/pagEstudioante",[ft.Column(
-                                        [a.ventanaEstudiante(self.page)],
+                                        [h.hacerintefazEstudiantes(self.page)],
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],
                         ))  
+                        
+                if  self.page.route == "/pagEstudioante/hacerPrueba":
+                        a=VentanaPrincipalEstudiante()
+                        h=InterfazUsuario()
+                        self.page.views.append(ft.View(
+                                "/pagEstudioante/hacerPrueba",[ft.Column(
+                                        [a.ventanaEstudiante(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        )) 
+                 
                      
         if  self.page.route == "/pagInicioUsuarios":
                  self.page.views.append(ft.View(

@@ -4,6 +4,7 @@ from baseDeDatos.crearTablas import CrearTablas
 
 class DbUsuario:
     crearTablas = CrearTablas()
+    
     conexion = mysql.connector.connect(
         host="monorail.proxy.rlwy.net",
         user="root",
@@ -221,7 +222,6 @@ class DbUsuario:
                 cursor.close()
 
 
-# Ejemplo de uso
 
     
 
