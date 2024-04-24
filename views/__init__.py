@@ -7,3 +7,4 @@ from .viewAgregarAdministradores import AgregarAdministradores
 from .viewEliminarUsuarios import EliminarUsuarios
 from .viewVerPruebas import VerPruebas
 from .viewEliminarPrueba import EliminarPrueba
+from .viewVerArbolNotas import ArbolNotas

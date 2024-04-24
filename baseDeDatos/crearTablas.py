@@ -35,16 +35,21 @@ class CrearTablas():
     def create_table_usuario(self):
         try:
             cursor = self.conexion.cursor()
-            
+
             # Define la estructura de la tabla
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS usuarios (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     userName VARCHAR(255),
-                    id_Account INT
+                    id_Account INT,
+                    promNota INT
                 )
             ''')
             self.conexion.commit()
+            print("La tabla 'usuarios' se creó correctamente.")
+        except Exception as e:
+            print(f"Error al crear la tabla: {str(e)}")
+
             
             
         except mysql.connector.Error as e:

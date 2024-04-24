@@ -9,13 +9,14 @@ from .viewVerPruebas import VerPruebas
 from .viewEliminarPrueba import EliminarPrueba
 from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 from .viewVerUsuarios import ViewVerUsuarios
+from .viewVerArbolNotas import ArbolNotas
 import variableGlobal
 
 class VentanaMain:
     def iniciar(self):
-        """ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)"""
-        ft.app(target=self.main)
-        ft.app()
+        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
+        """ft.app(target=self.main)"""
+
         
     def route(self,route):
         self.page.views.clear()
@@ -95,6 +96,17 @@ class VentanaMain:
                                         alignment=ft.alignment.center
                                 )],
                         ))
+
+                if  self.page.route == "/pagInicioAdmin/verArbolNotas":
+                        a=VentanaPrincipalAdmin()
+                        h=ArbolNotas()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/verArbolNotas",[ft.Column(
+                                        [a.ventanaAdmin(self.page),h.contador(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
         if variableGlobal.esta_registrado() and (not variableGlobal.es_admin()):
                 if  self.page.route == "/pagEstudioante":
                         a=VentanaPrincipalEstudiante()
@@ -105,7 +117,8 @@ class VentanaMain:
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],
-                        ))      
+                        ))  
+                     
         if  self.page.route == "/pagInicioUsuarios":
                  self.page.views.append(ft.View(
                                 "/pagInicioAdmin",[self.interfaz(),self.pagInicio()],

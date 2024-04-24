@@ -44,7 +44,7 @@ class DbUsuario:
             ''', (usuarioStr,))
             usuario = cursor.fetchall()
             if len(usuario)>0 :
-                return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]))
+                return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]),usuario[0][3])
             else:
                 return(None)
         except mysql.connector.Error as e:
@@ -74,15 +74,17 @@ class DbUsuario:
             self.insert_account(usuario)
             cursor = self.conexion.cursor()
             cursor.execute('''
-                INSERT INTO usuarios (id, userName, id_account)
-                VALUES (%s, %s, %s)
-            ''', (usuario.id, usuario.userName, usuario.id_account))
+                INSERT INTO usuarios (id, userName, id_account, promNota)
+                VALUES (%s, %s, %s, %s)
+            ''', (usuario.id, usuario.userName, usuario.id_account, usuario.promNota))
             self.conexion.commit()
+            print("Usuario insertado correctamente.")
         except mysql.connector.Error as e:
             print(f"Error al insertar usuario: {e}")
         finally:
             if cursor:
                 cursor.close()
+
 
     def insert_account(self, usuario: Usuario):
         try:
@@ -128,6 +130,23 @@ class DbUsuario:
         finally:
             if cursor:
                 cursor.close()
+
+    def modify_promNota(self, usuario_id, new_promNota):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute('''
+                UPDATE usuarios
+                SET promNota = %s
+                WHERE id = %s
+            ''', (new_promNota, usuario_id))
+            self.conexion.commit()
+            print(f"El valor de promNota para el usuario con ID {usuario_id} se ha modificado correctamente.")
+        except mysql.connector.Error as e:
+            print(f"Error al modificar promNota: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+
 
     def ver_tabla_usuario(self):
         try:

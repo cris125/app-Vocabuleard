@@ -51,10 +51,12 @@ class VentanaPrincipalEstudiante:
                 pruebasDic.update({info[1]:[self.calificaionPrueba.count(True)]})
                 
             pruebasStr=json.dumps(pruebasDic)
+
             dbUsua.actualizar_prueba(ususario[0],pruebasStr)
-            
+            dbUsua.modify_promNota(ususario[0],(len(self.calificaionPrueba)+int(ususario[3]))/2)
         self.intefazEstudiantes()  
         self.page.update()
+
 
     def pasarPreguntas(self, pregunta):
 

@@ -18,7 +18,8 @@ class ViewIniciarSesion:
 
         await asyncio.sleep(3)
         self.contenido.controls.clear()
-
+        
+        print(userName)
         if userName[2][0][3] == True:
             variableGlobal.establecer_usuario_actual(self.textFile.value, admin=True)
             print("es admin")

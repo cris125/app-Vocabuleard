@@ -3,10 +3,11 @@ from views.ventanaMain import VentanaMain
 from baseDeDatos.eliminarTablas import ElimTablas
 class Main:
     def __init__(self) -> None:
+        
         a1=  VentanaMain()
         a1.iniciar()
         
-a=Main()  
+a=Main()
 
 
 # si el programa se descontrola
