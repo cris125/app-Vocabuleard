@@ -11,6 +11,7 @@ from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 from .viewVerUsuarios import ViewVerUsuarios
 from .viewVerArbolNotas import ArbolNotas
 from .viewInterfazUsuario import InterfazUsuario
+from .viewVocabulay import Vocabulay
 import variableGlobal
 
 class VentanaMain:
@@ -130,7 +131,16 @@ class VentanaMain:
                                         alignment=ft.alignment.center
                                 )],
                         )) 
-                 
+                if  self.page.route == "/pagEstudioante/vocabulary":
+                        a=Vocabulay()
+                        h=InterfazUsuario()
+                        self.page.views.append(ft.View(
+                                "/pagEstudioante/vocabulary",[ft.Column(
+                                        [h.hacerintefazEstudiantes(self.page),a.aprtadoVocabulario(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))  
                      
         if  self.page.route == "/pagInicioUsuarios":
                  self.page.views.append(ft.View(

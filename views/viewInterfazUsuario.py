@@ -8,7 +8,7 @@ class InterfazUsuario:
         
         interfaz=ft.Container(ft.Row([
                 ft.Container(content=ft.TextButton(text="Hacer pruebas",on_click=lambda _: page.go("/pagEstudioante/hacerPrueba"))),
-                ft.Container(content=ft.TextButton(text="Ver vocabulario")),
+                ft.Container(content=ft.TextButton(text="Ver vocabulario",on_click=lambda _: page.go("/pagEstudioante/vocabulary"))),
                 ft.Container(content=ft.TextButton(text="Salir",on_click=salir )),
                 ],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
             ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
