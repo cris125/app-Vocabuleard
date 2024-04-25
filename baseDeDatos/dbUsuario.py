@@ -1,17 +1,11 @@
 import mysql.connector
 from models.usuario import Usuario
 from baseDeDatos.crearTablas import CrearTablas
-
+import variableGlobal
 class DbUsuario:
     crearTablas = CrearTablas()
     
-    conexion = mysql.connector.connect(
-        host="monorail.proxy.rlwy.net",
-        user="root",
-        password="VQkGgBYZGwDkSDSoDNBUDKooRxdwJUOJ",
-        port="16333",
-        database="railway"
-    )
+    conexion = variableGlobal.baseDatosConeccion
     def crearAdmin(self, user: str):
         try:
             if not self.verificar_usuario(user):

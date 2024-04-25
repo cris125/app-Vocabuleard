@@ -58,13 +58,14 @@ class VentanaPrincipalEstudiante:
             pruebasStr=json.dumps(pruebasDic)
 
             dbUsua.actualizar_prueba(ususario[0],pruebasStr)
-            if ususario[3] != None:
-                
-                promedio=float(ususario[3])+len(self.calificaionPrueba)/2
-                print(promedio)
-                dbUsua.modify_promNota(ususario[0],promedio)
-            else:
-                dbUsua.modify_promNota(ususario[0],(str(len(self.calificaionPrueba))))
+            
+        if ususario[3] != None:
+            
+            promedio=(float(ususario[3])+self.calificaionPrueba.count(True))/2
+            dbUsua.modify_promNota(ususario[0],promedio)
+            
+        else:
+            dbUsua.modify_promNota(ususario[0],self.calificaionPrueba.count(True))
             
         self.page.go("/pagEstudioante")
 

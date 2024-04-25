@@ -19,9 +19,8 @@ import variableGlobal
 
 class VentanaMain:
     def iniciar(self):
-        """ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)"""
-        ft.app(target=self.main)
-
+        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
+        """ft.app(target=self.main)"""
         
     def route(self,route):
         self.page.views.clear()

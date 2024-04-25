@@ -4,24 +4,24 @@ class EjercicioFrase:
        
 
     def validarPal(self,e):
-        
-        if  self.contenido.controls[-1].value in  self.palabras:
-                lista=self.crearDropdown(self.grafoFrase .obtener_relaciones([ self.contenido.controls[-1].value,""]))
-                self.contenido.controls.append(lista)
+        if len(self.grafoFrase .obtener_relaciones([ self.contenido.controls[-1].value,""]))>0:
+            if  self.contenido.controls[-1].value in  self.palabras:
+                    lista=self.crearDropdown(self.grafoFrase .obtener_relaciones([ self.contenido.controls[-1].value,""]))
+                    self.contenido.controls.append(lista)
         self.page.update()    
 
     def crearDropdown(self,lista):
         
         if type(lista)==str:
             dd = ft.Dropdown(
-                width=150,
+                width=200,
                 options=[ft.dropdown.Option(lista)],
             )
         else:
                   
             opti=[ft.dropdown.Option(i) for i in lista]
             dd = ft.Dropdown(
-                width=150,
+                width=200,
                 options=opti,
             )
         

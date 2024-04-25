@@ -1,13 +1,8 @@
 import mysql.connector
+import variableGlobal
 
 class ElimTablas:
-    conexion = mysql.connector.connect(
-        host="monorail.proxy.rlwy.net",
-        user="root",
-        password="VQkGgBYZGwDkSDSoDNBUDKooRxdwJUOJ",
-        port="16333",
-        database="railway"
-    )
+    conexion = variableGlobal.baseDatosConeccion
     
     def __init__(self):
         self.cursor = self.conexion.cursor()

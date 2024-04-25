@@ -2,15 +2,9 @@ import json
 import mysql.connector
 from models.usuario import Usuario
 from baseDeDatos.crearTablas import CrearTablas
-
+import variableGlobal
 class dbPrueba:
-    conexion = mysql.connector.connect(
-        host="monorail.proxy.rlwy.net",
-        user="root",
-        password="VQkGgBYZGwDkSDSoDNBUDKooRxdwJUOJ",
-        port="16333",
-        database="railway"
-    )
+    conexion = variableGlobal.baseDatosConeccion
 
     def guardar_en_base_de_datos(self,prueba):
         try:

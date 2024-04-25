@@ -1,3 +1,4 @@
+import mysql.connector
 class Usuario:
     def __init__(self, nombre, admin=False):
         self.nombre = nombre
@@ -28,6 +29,14 @@ def logOut():
     usuario_actual=None
     return False
 # Ejemplo de uso:
+
+baseDatosConeccion=conexion = mysql.connector.connect(
+        host="monorail.proxy.rlwy.net",
+        user="root",
+        password="VQkGgBYZGwDkSDSoDNBUDKooRxdwJUOJ",
+        port="16333",
+        database="railway"
+    )
 """establecer_usuario_actual("Usuario1", admin=True)
 print("¿Está registrado?", esta_registrado())
 print("¿Es admin?", es_admin())"""
