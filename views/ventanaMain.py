@@ -12,7 +12,10 @@ from .viewVerUsuarios import ViewVerUsuarios
 from .viewVerArbolNotas import ArbolNotas
 from .viewInterfazUsuario import InterfazUsuario
 from .viewVocabulay import Vocabulay
+from .viewEje import EjercicioFrase
+from .viewProgreso import MostrarProgreso
 import variableGlobal
+
 
 class VentanaMain:
     def iniciar(self):
@@ -140,8 +143,30 @@ class VentanaMain:
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],
+                        )) 
+                if  self.page.route == "/pagEstudioante/ejerFrase":
+                        a=EjercicioFrase()
+                        h=InterfazUsuario()
+                        self.page.views.append(ft.View(
+                                "/pagEstudioante/ejerFrase",[ft.Column(
+                                        [h.hacerintefazEstudiantes(self.page),a.mostrarEjer(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
                         ))  
-                     
+                
+               
+                if  self.page.route ==  "/pagEstudioante/Verprogreso":
+                        a=MostrarProgreso()
+                        h=InterfazUsuario()
+                        self.page.views.append(ft.View(
+                                 "/pagEstudioante/Verprogreso",[ft.Column(
+                                        [h.hacerintefazEstudiantes(self.page),a.venPrincipal(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))  
+
         if  self.page.route == "/pagInicioUsuarios":
                  self.page.views.append(ft.View(
                                 "/pagInicioAdmin",[self.interfaz(),self.pagInicio()],

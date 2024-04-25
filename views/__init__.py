@@ -10,3 +10,5 @@ from .viewEliminarPrueba import EliminarPrueba
 from .viewVerArbolNotas import ArbolNotas
 from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 from .viewInterfazUsuario import InterfazUsuario
+from .viewEje import EjercicioFrase
+from .viewProgreso import MostrarProgreso
