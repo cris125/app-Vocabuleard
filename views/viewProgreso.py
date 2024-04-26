@@ -43,12 +43,12 @@ class MostrarProgreso:
         if len(tocasLasTotales)>0: 
             for i in tocasLasTotales:
                 columna.controls.append(
-                    ft.Container(content=ft.Text(value="Prueba pendiente :"+str(i),size=15)
+                    ft.Container(content=ft.Text(value="Prueba pendiente :"+str(i),size=15,color=ft.colors.BLACK)
                             ,border_radius=10,padding=5,margin=5,bgcolor="#CBDABA")
                     )
         else:
             columna.controls.append(
-                        ft.Container(content=ft.Text(value="No Actividades pendientes"),
+                        ft.Container(content=ft.Text(value="No Actividades pendientes",size=15,color=ft.colors.BLACK),
                                      border_radius=10,padding=5,margin=5,bgcolor="#A8D971"))
             
         columna.controls.insert(0,
@@ -68,14 +68,14 @@ class MostrarProgreso:
                 lista=pruebas[i]
                 for x in lista:
                     columna.controls.insert(0,
-                        ft.Container(content=ft.Text(value="Prueba :"+str(i)+" Nota :"+str(x))
+                        ft.Container(content=ft.Text(value="Prueba :"+str(i)+" Nota :"+str(x),color=ft.colors.BLACK)
                             ,border_radius=10,padding=5,margin=5,bgcolor="#CBDABA")
                         
                         )
         else:
             pruebas=None
             columna.controls.append(
-                        ft.Container(content=ft.Text(value="No hay Registro de actividad",size=15)
+                        ft.Container(content=ft.Text(value="No hay Registro de actividad",size=15,color=ft.colors.BLACK)
                             ,border_radius=10,padding=5,margin=5,bgcolor="#CBDABA")
                         ) 
         columna.controls.insert(0,ft.Container(content=ft.Text(value="Pruebas Realizadas",size=25,color=ft.colors.BLUE_GREY),

@@ -30,11 +30,19 @@ def logOut():
     return False
 # Ejemplo de uso:
 
-baseDatosConeccion=conexion = mysql.connector.connect(
+"""baseDatosConeccion=conexion = mysql.connector.connect(
         host="monorail.proxy.rlwy.net",
         user="root",
         password="VQkGgBYZGwDkSDSoDNBUDKooRxdwJUOJ",
         port="16333",
+        database="railway"
+    )"""
+
+baseDatosConeccion=conexion = mysql.connector.connect(
+        host="monorail.proxy.rlwy.net",
+        user="root",
+        password="dFmitdJCLqsRvtCtBpvZINZfylIKdOUb",
+        port="44693",
         database="railway"
     )
 """establecer_usuario_actual("Usuario1", admin=True)
