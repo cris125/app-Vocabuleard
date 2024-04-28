@@ -1,8 +1,8 @@
 
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
-import variableGlobal
 import asyncio
+
 class ViewIniciarSesion:
     textFile=ft.TextField(value="(Numero De usuario)")
     contenido=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
@@ -21,11 +21,16 @@ class ViewIniciarSesion:
         
         print(userName)
         if userName[2][0][3] == True:
-            variableGlobal.establecer_usuario_actual(self.textFile.value, admin=True)
+            self.page.client_storage.set("user", self.textFile.value)
+            self.page.client_storage.set("is_admin", True)
+            
             print("es admin")
             self.page.go("/pagInicioAdmin")
         else:
-            variableGlobal.establecer_usuario_actual(self.textFile.value, admin=False)
+            self.page.client_storage.set("user", self.textFile.value)
+            self.page.client_storage.set("is_admin", False)
+            
+
             self.page.go("/pagEstudioante")
             print("no es admin")
         

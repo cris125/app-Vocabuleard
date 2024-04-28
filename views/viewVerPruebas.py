@@ -1,5 +1,6 @@
 from baseDeDatos.dbPrueba import dbPrueba
 import flet as ft
+
 class VerPruebas:
     def cuadroPrincipal(self):
         self.cuadroPruebas=ft.GridView(

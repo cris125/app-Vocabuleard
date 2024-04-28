@@ -1,10 +1,10 @@
 import flet as ft
-import variableGlobal
+
 class VentanaPrincipalAdmin:
    
         
     def salir(self,e):
-        variableGlobal.logOut()
+        self.page.client_storage.clear()
         self.page.go("/")
               
     def ventanaAdmin(self,page):

@@ -2,13 +2,13 @@ import json
 import flet as ft
 from baseDeDatos.dbPrueba import dbPrueba
 from baseDeDatos.dbUsuario import DbUsuario
-import variableGlobal
 import time
+
 class VentanaPrincipalEstudiante:
     
     def intefazEstudiantes(self):
         def salir(e):
-            variableGlobal.logOut()
+            self.page.client_storage.clear()
             self.page.go("/")
            
         self.contenido=ft.Row()
@@ -35,7 +35,9 @@ class VentanaPrincipalEstudiante:
 
     
         dbUsua=DbUsuario()
-        ususario=dbUsua.getUser(variableGlobal.usuario_actual.nombre)
+        
+        
+        ususario=dbUsua.getUser(self.page.client_storage.get("user"))
         pruebas=ususario[2][0][1]
         
         self.calificaionPrueba=[]

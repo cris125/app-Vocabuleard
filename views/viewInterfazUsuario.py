@@ -1,5 +1,6 @@
 import variableGlobal
 import flet as ft
+
 class InterfazUsuario:
     def hacerintefazEstudiantes(self,page):
         def salir(e):

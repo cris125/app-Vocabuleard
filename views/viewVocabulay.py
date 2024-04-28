@@ -1,5 +1,6 @@
 import flet as ft 
 from models.ArbolB import Diccionario
+
 class Vocabulay:
     def buscarPalabra(self,e):
         dic=Diccionario()

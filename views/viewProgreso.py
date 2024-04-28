@@ -2,13 +2,14 @@ import flet as ft
 from baseDeDatos.dbUsuario import DbUsuario
 from baseDeDatos.dbPrueba import dbPrueba
 import json
-import variableGlobal
+
 class MostrarProgreso:
     def venPrincipal(self,page):
         self.page=page 
 
         usuarioDb=DbUsuario()
-        self.usuario=usuarioDb.getUser(variableGlobal.usuario_actual.nombre)
+        
+        self.usuario=usuarioDb.getUser(page.client_storage.get("user"))
 
         self.contenedor=ft.Container(content=ft.Row(
             [ft.Row([ft.Container(content=self.mostrarColaTareas(),border_radius=10,border=ft.border.all(2, ft.colors.BLACK))

@@ -14,7 +14,6 @@ from .viewInterfazUsuario import InterfazUsuario
 from .viewVocabulay import Vocabulay
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
-import variableGlobal
 
 
 class VentanaMain:
@@ -34,7 +33,7 @@ class VentanaMain:
                     "/pagInicio",[self.interfaz(),self.pagInicio()],
         ))
             
-        if variableGlobal.esta_registrado() and variableGlobal.es_admin():
+        if self.page.client_storage.get("user") and self.page.client_storage.get("is_admin"):
 
                 if  self.page.route == "/pagInicioAdmin":
                         a=VentanaPrincipalAdmin()
@@ -111,7 +110,7 @@ class VentanaMain:
                                         alignment=ft.alignment.center
                                 )],
                         ))
-        if variableGlobal.esta_registrado() and (not variableGlobal.es_admin()):
+        if self.page.client_storage.get("user") and (not self.page.client_storage.get("is_admin")):
                 if  self.page.route == "/pagEstudioante":
                         a=VentanaPrincipalEstudiante()
                         h=InterfazUsuario()
