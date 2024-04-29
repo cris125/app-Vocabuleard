@@ -12,3 +12,4 @@ from .viewsVentaPrincipalEstudiantes import VentanaPrincipalEstudiante
 from .viewInterfazUsuario import InterfazUsuario
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
+from .viewContrasenaAdmin import ContrasenaAdmin

@@ -1,10 +1,10 @@
-import variableGlobal
+
 import flet as ft
 
 class InterfazUsuario:
-    def hacerintefazEstudiantes(self,page):
+    def hacerintefazEstudiantes(self,page:ft.Page):
         def salir(e):
-            variableGlobal.logOut()
+            page.client_storage.clear()
             page.go("/")
         
         interfaz=ft.Container(ft.Row([

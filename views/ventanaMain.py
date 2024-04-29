@@ -14,7 +14,7 @@ from .viewInterfazUsuario import InterfazUsuario
 from .viewVocabulay import Vocabulay
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
-
+from .viewContrasenaAdmin import ContrasenaAdmin
 
 class VentanaMain:
     def iniciar(self):
@@ -41,6 +41,14 @@ class VentanaMain:
                         self.page.views.append(ft.View(
                                 "/pagInicioAdmin",[a.ventanaAdmin(self.page)],
                         )) 
+
+                if  self.page.route == "/pagInicioAdmin/contrasena":
+                        a=ContrasenaAdmin()
+                        
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/contrasena",[a.pedirContraseña(self.page)],
+                        )) 
+
                 if  self.page.route == "/pagInicioAdmin/verUsuarios":
                         a=VentanaPrincipalAdmin()
                         h=ViewVerUsuarios()

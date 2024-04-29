@@ -4,7 +4,7 @@ import flet as ft
 import asyncio
 
 class ViewIniciarSesion:
-    textFile=ft.TextField(value="(Numero De usuario)")
+    textFile=ft.TextField(label="(Numero De usuario)")
     contenido=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
 
     def validarUsuario(self,e):
@@ -25,7 +25,7 @@ class ViewIniciarSesion:
             self.page.client_storage.set("is_admin", True)
             
             print("es admin")
-            self.page.go("/pagInicioAdmin")
+            self.page.go("/pagInicioAdmin/contrasena")
         else:
             self.page.client_storage.set("user", self.textFile.value)
             self.page.client_storage.set("is_admin", False)
