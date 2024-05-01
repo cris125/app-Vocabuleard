@@ -2,16 +2,18 @@ import json
 import flet as ft
 from baseDeDatos.dbPrueba import dbPrueba
 from baseDeDatos.dbUsuario import DbUsuario
+import random
 import time
 
 class VentanaPrincipalEstudiante:
+    
     
     def intefazEstudiantes(self):
         def salir(e):
             self.page.client_storage.clear()
             self.page.go("/")
            
-        self.contenido=ft.Row()
+        self.contenido=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
         self.inter.controls.clear()
         self.inter.controls.extend(
             [
@@ -34,11 +36,9 @@ class VentanaPrincipalEstudiante:
         preguntas=info[2]
 
     
-        dbUsua=DbUsuario()
         
         
-        ususario=dbUsua.getUser(self.page.client_storage.get("user"))
-        pruebas=ususario[2][0][1]
+        pruebas=self.ususario[2][0][1]
         
         self.calificaionPrueba=[]
         for i in preguntas:
@@ -48,7 +48,7 @@ class VentanaPrincipalEstudiante:
         if pruebas is None:
             pruebasDic={info[1]:[self.calificaionPrueba.count(True)]}
             pruebasStr=json.dumps(pruebasDic)
-            dbUsua.actualizar_prueba(ususario[0],pruebasStr)
+            self.dbUsua.actualizar_prueba(self.ususario[0],pruebasStr)
         else:
             pruebasDic=json.loads(pruebas)
             
@@ -59,15 +59,15 @@ class VentanaPrincipalEstudiante:
                 
             pruebasStr=json.dumps(pruebasDic)
 
-            dbUsua.actualizar_prueba(ususario[0],pruebasStr)
+            self.dbUsua.actualizar_prueba(self.ususario[0],pruebasStr)
             
-        if ususario[3] != None:
+        if self.ususario[3] != None:
             
-            promedio=(float(ususario[3])+self.calificaionPrueba.count(True))/2
-            dbUsua.modify_promNota(ususario[0],promedio)
+            promedio=(float(self.ususario[3])+self.calificaionPrueba.count(True))/2
+            self.dbUsua.modify_promNota(self.ususario[0],promedio)
             
         else:
-            dbUsua.modify_promNota(ususario[0],self.calificaionPrueba.count(True))
+            self.dbUsua.modify_promNota(self.ususario[0],self.calificaionPrueba.count(True))
             
         self.page.go("/pagEstudioante")
 
@@ -147,30 +147,40 @@ class VentanaPrincipalEstudiante:
         
 
     def cuadroPrueba(self,info):
-        contbtn=ft.Container(
-            content=ft.ElevatedButton(text=str(info[1])+"(hacer  prueba)", data=info ,on_click=self.hacerPrueba)
-            ,width=150,height=150,bgcolor=ft.colors.BLUE_500)
-        return(contbtn)
+        colores=["#E05A3D","#A5E03D","#3DE093","#3DCAE0","#3D7DE0","#B43DE0","#BD8DCE","#8DCDCE","#8DCE96","#799D9E","#7C9E79"]
+        content=ft.ElevatedButton(text=str(info[1])+"(hacer  prueba)", data=info ,on_click=self.hacerPrueba,bgcolor=colores[random.randrange(0,9)],color=ft.colors.WHITE)
+            
+        return(content)
        
     def verPruebas(self):
         a=dbPrueba()
+
         pruebas=a.leer_desde_base_de_datos()
+        
         cuadro=ft.GridView(expand=1,
                 runs_count=5,
-                max_extent=300,
+                max_extent=250,
                 child_aspect_ratio=1.0,
                 spacing=5,
                 run_spacing=5,)
+        
+
+        
         for prueba in pruebas:
             cuadro.controls.append(self.cuadroPrueba(prueba))
         self.contenido.controls.append(cuadro)    
         self.page.update()
+        del a
 
     def ventanaEstudiante(self,page:ft.Page):
         self.page=page 
+        self.dbUsua=DbUsuario()
+        self.ususario=self.dbUsua.getUser(self.page.client_storage.get("user"))
+        
         self.inter=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER )
         self.intefazEstudiantes()
         self.verPruebas()
+        del self.dbUsua
         return(self.inter)
 
 
