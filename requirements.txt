@@ -9,9 +9,9 @@ click==8.1.7
 colorama==0.4.6
 cookiecutter==2.6.0
 fastapi==0.110.0
-flet==0.21.1
-flet-core==0.21.1
-flet-runtime==0.21.1
+flet==0.21.2
+flet-core==0.21.2
+flet-runtime==0.21.2
 h11==0.14.0
 httpcore==1.0.4
 httptools==0.6.1
