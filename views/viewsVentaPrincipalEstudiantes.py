@@ -180,7 +180,6 @@ class VentanaPrincipalEstudiante:
         self.inter=ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER )
         self.intefazEstudiantes()
         self.verPruebas()
-        del self.dbUsua
         return(self.inter)
 
 

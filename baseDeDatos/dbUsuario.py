@@ -6,6 +6,7 @@ class DbUsuario:
     crearTablas = CrearTablas()
     
     conexion = variableGlobal.baseDatosConeccion
+    
     def crearAdmin(self, user: str):
         try:
             if not self.verificar_usuario(user):
