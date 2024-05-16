@@ -25,13 +25,13 @@ class ViewAgregarPrueba:
         self.page.go("/pagInicioAdmin")
         
     def AgregarOtraPregunta(self,e):
-        self.pregunta=ft.TextField(value="(pregunta)")
-        self.imagen=ft.TextField(value="(imagen)")
-        self.a=ft.TextField(value="Respuestas A")
-        self.b= ft.TextField(value="Respuestas B")
-        self.c=ft.TextField(value="Respuestas C")
-        self.d=ft.TextField(value="Respuestas D")
-        self.respuestaCorrecta=ft.TextField(value="Respuestas D")
+        self.pregunta=ft.TextField(label="(pregunta)")
+        self.imagen=ft.TextField(label="(imagen)")
+        self.a=ft.TextField(label="Respuestas A")
+        self.b= ft.TextField(label="Respuestas B")
+        self.c=ft.TextField(label="Respuestas C")
+        self.d=ft.TextField(label="Respuestas D")
+        self.respuestaCorrecta=ft.TextField(label="Respuestas D")
         
         continer=ft.Container(content=ft.Column(
             [           ft.Text(value="Pregunta:",size=20),
@@ -68,17 +68,21 @@ class ViewAgregarPrueba:
         return(intefaz)
     
     def guardarPregunta(self,e):
-        print((self.pregunta.value,
-                             [self.a.value , self.b.value , self.c.value , self.d.value],
-                             self.respuestaCorrecta.value,
-                             self.imagen.value))
+        preguta=self.pregunta.value.replace(",","")
+        resA=self.a.value.replace(",","")
+        resB=self.b.value.replace(",","")
+        resC=self.c.value.replace(",","")
+        resD=self.d.value.replace(",","")
+        resCorc=self.respuestaCorrecta.value.replace(",","")
+        img=self.imagen.value.replace(",","")
         
-        newPregunta=Pregunta(self.pregunta.value,
-                             [self.a.value , self.b.value , self.c.value , self.d.value],
-                             self.respuestaCorrecta.value,
-                             self.imagen.value)
+        newPregunta=Pregunta(preguta,
+                             [resA , resB , resC , resD],
+                             resCorc,
+                             img)
         self.newPrueba.insertarPregunta(newPregunta)
         self.preguntaView.controls.clear()
+
         self.preguntasGuardadas.controls.append(
             ft.Container(
                 content=ft.Text(value= "pregunta "+str(len(self.preguntasGuardadas.controls)+1)+" guardada")
