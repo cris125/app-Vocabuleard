@@ -27,8 +27,8 @@ class MostrarProgreso:
         pruebasEchas=[]
         tocasLasTotales=[]
         
-        if self.usuario[2][0][1] != None:
-            pruebas=json.loads(self.usuario[2][0][1])
+        if self.usuario[3][0][1] != None:
+            pruebas=json.loads(self.usuario[3][0][1])
             for i in pruebas.keys():
                 pruebasEchas.append(i)
          
@@ -63,8 +63,8 @@ class MostrarProgreso:
         columna=ft.Column(
             []
         ,scroll=True)
-        if self.usuario[2][0][1] != None:
-            pruebas=json.loads(self.usuario[2][0][1])
+        if self.usuario[3][0][1] != None:
+            pruebas=json.loads(self.usuario[3][0][1])
             for i in pruebas.keys():
                 lista=pruebas[i]
                 for x in lista:

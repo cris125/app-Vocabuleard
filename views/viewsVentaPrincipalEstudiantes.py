@@ -61,9 +61,9 @@ class VentanaPrincipalEstudiante:
 
             self.dbUsua.actualizar_prueba(self.ususario[0],pruebasStr)
             
-        if self.ususario[3] != None:
+        if self.ususario[4] != None:
             
-            promedio=(float(self.ususario[3])+self.calificaionPrueba.count(True))/2
+            promedio=(float(self.ususario[4])+self.calificaionPrueba.count(True))/2
             self.dbUsua.modify_promNota(self.ususario[0],promedio)
             
         else:

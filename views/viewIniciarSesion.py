@@ -1,7 +1,8 @@
 
 from baseDeDatos.dbUsuario import DbUsuario
 import flet as ft
-import asyncio
+import time
+import hashlib
 
 class ViewIniciarSesion:
     textFileUserName=ft.TextField(label="(Nomrbre de usuario)")
@@ -9,49 +10,58 @@ class ViewIniciarSesion:
     contenido=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
 
     def validarUsuario(self,e):
-        e.control.disabled=True
-        self.page.update()
-        asyncio.run(self.validarUsuarioAsuncrona())
+        """self.page.update()"""
+        self.getDbUsuario()
+        """if res==1:"""
+            
         
-    async def getDbUsuario(self):
+    def getDbUsuario(self):
         usuario=DbUsuario()
-        usuarioExist=usuario.verificar_usuario(self.textFileUserName.value)
+        usuarioExist=usuario.verificar_usuario(self.textFileUserName.value) 
+        
         """userName=usuario.crearUsuario(self.textFileUserName.value,self.textFilePassword)"""
 
-        await asyncio.sleep(1)
         self.contenido.controls.clear()
-        if usuarioExist:
-            userName=usuario.getUser(self.textFileUserName.value)
-            print(userName)
-            if userName[2][0][3] == True:
-                self.page.client_storage.set("user", self.textFileUserName.value)
-                self.page.client_storage.set("is_admin", True)
-                
-                print("es admin")
-                self.page.go("/pagInicioAdmin/contrasena")
-            else:
-                self.page.client_storage.set("user", self.textFileUserName.value)
-                self.page.client_storage.set("is_admin", False)
-                
-
-                self.page.go("/pagEstudioante")
-                print("no es admin")
-        else:
-            print("usuario no existe")
         
-    async def mensajeCargar(self):
+        if usuarioExist:
+            userName=usuario.getUser(self.textFileUserName.value) 
+            contasenaCorrecta=self.hacerContrasena(self.textFilePassword.value) == userName[2]
+
+            if contasenaCorrecta:
+                if userName[3][0][3] == True:
+                    self.page.client_storage.set("user", self.textFileUserName.value)
+                    self.page.client_storage.set("is_admin", True)
+                    
+                    self.page.go("/pagInicioAdmin")
+                    print("es admin")
+                else:
+                    self.page.client_storage.set("user", self.textFileUserName.value)
+                    self.page.client_storage.set("is_admin", False)
+
+                    self.page.go("/pagEstudioante")
+                    print("no es admin")
+            else:
+                self.mensajeContraInco()
+                print("contraseña incorrecta")
+                return(1)
+        else:
+            self.mensajeContraInco()
+            print("Este usuario no existe")
+            return(1)
+        
+    def mensajeContraInco(self):
         self.contenido.controls.append(
-            ft.Text(value="Cargando...",size=25)
+            ft.Text(value="Contraseña o Usuario Incorrecto",size=15,color=ft.colors.RED_500)
         )
         self.page.update()
+        time.sleep(2)
+        self.contenido.controls.pop(-1)
+        self.page.update()
 
-    async def validarUsuarioAsuncrona(self):
-        tareas=[]
-        tareas.append(asyncio.create_task(self.mensajeCargar()))
-        tareas.append(asyncio.create_task(self.getDbUsuario()))
-        await asyncio.gather(*tareas)
-
-        
+    def hacerContrasena(self,contrasena:str):
+        m = hashlib.sha256()
+        m.update(contrasena.encode())
+        return m.hexdigest()    
         
     
     def pestañaInicio(self,page):

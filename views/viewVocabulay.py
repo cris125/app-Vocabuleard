@@ -16,7 +16,7 @@ class Vocabulay:
 
     def aprtadoVocabulario(self,page):
         self.page=page
-        self.palabraBusqueda=ft.TextField(value="(palabra)")
+        self.palabraBusqueda=ft.TextField(label="(palabra)")
         self.palabraEncontrada=ft.Text(value="",size=25)
         contenedor=ft.Container(
             content=ft.Row(

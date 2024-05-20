@@ -40,7 +40,7 @@ class DbUsuario:
             ''', (usuarioStr,))
             usuario = cursor.fetchall()
             if len(usuario)>0 :
-                return (usuario[0][0],usuario[0][1],self.getAccountId(usuario[0][2]),usuario[0][3])
+                return (usuario[0][0],usuario[0][1],usuario[0][2],self.getAccountId(usuario[0][3]),usuario[0][4])
             else:
                 return(None)
         except mysql.connector.Error as e:

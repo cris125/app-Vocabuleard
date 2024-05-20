@@ -14,7 +14,8 @@ from .viewInterfazUsuario import InterfazUsuario
 from .viewVocabulay import Vocabulay
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
-from .viewContrasenaAdmin import ContrasenaAdmin
+from .viewCrearUsuario import CrearUsuario
+
 
 class VentanaMain:
     def iniciar(self):
@@ -31,7 +32,11 @@ class VentanaMain:
             self.page.views.append(ft.View(
                     "/pagInicio",[self.interfaz(),self.pagInicio()],
         ))
-            
+        if  self.page.route == "/crearUsuario":
+                        a=CrearUsuario()
+                        self.page.views.append(ft.View(
+                                "/crearUsuario",[self.interfaz(),a.crearUser(self.page)],
+                        ))    
         if self.page.client_storage.get("user") and self.page.client_storage.get("is_admin"):
 
                 if  self.page.route == "/pagInicioAdmin":
@@ -41,12 +46,7 @@ class VentanaMain:
                                 "/pagInicioAdmin",[a.ventanaAdmin(self.page)],
                         )) 
 
-                if  self.page.route == "/pagInicioAdmin/contrasena":
-                        a=ContrasenaAdmin()
-                        
-                        self.page.views.append(ft.View(
-                                "/pagInicioAdmin/contrasena",[a.pedirContraseña(self.page)],
-                        )) 
+                 
 
                 if  self.page.route == "/pagInicioAdmin/verUsuarios":
                         a=VentanaPrincipalAdmin()
@@ -203,6 +203,11 @@ class VentanaMain:
                 
                 ft.Container(
                         ft.OutlinedButton(text="Iniciar sesion",width=100, on_click=lambda _: self.page.go("/pagInicio") ),
+                        width=150,height=50,
+                        padding=5,),
+                        
+                ft.Container(
+                        ft.OutlinedButton(text="Crear Usuario",width=100, on_click=lambda _: self.page.go("/crearUsuario") ),
                         width=150,height=50,
                         padding=5,),
                 ],alignment=ft.MainAxisAlignment.SPACE_EVENLY,),bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
