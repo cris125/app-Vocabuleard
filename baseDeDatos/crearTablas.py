@@ -36,6 +36,7 @@ class CrearTablas():
                 CREATE TABLE IF NOT EXISTS usuarios (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     userName VARCHAR(255),
+                    contrasena VARCHAR(255),
                     id_Account INT,
                     promNota VARCHAR(255)
                 )

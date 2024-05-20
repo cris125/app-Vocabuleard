@@ -7,10 +7,10 @@ class DbUsuario:
     
     conexion = variableGlobal.baseDatosConeccion
     
-    def crearAdmin(self, user: str):
+    def crearAdmin(self, user: str,contrasena:str):
         try:
             if not self.verificar_usuario(user):
-                newAdmin = Usuario(user)
+                newAdmin = Usuario(user,contrasena)
                 newAdmin.account.admin=True
                 self.insert_usuario(newAdmin)
                 return(user)
@@ -20,10 +20,10 @@ class DbUsuario:
         except mysql.connector.Error as e:
             print(f"Error al crear admin: {e}")
             
-    def crearUsuario(self, user: str):
+    def crearUsuario(self, user: str,contrasena:str):
         try:
             if not self.verificar_usuario(user):
-                newUser = Usuario(user)
+                newUser = Usuario(user,contrasena)
                 self.insert_usuario(newUser)
                 return(self.getUser(user))
             else:
@@ -65,14 +65,14 @@ class DbUsuario:
                 cursor.close()
 
 
-    def insert_usuario(self, usuario):
+    def insert_usuario(self, usuario:Usuario):
         try:
             self.insert_account(usuario)
             cursor = self.conexion.cursor()
             cursor.execute('''
-                INSERT INTO usuarios (id, userName, id_account, promNota)
-                VALUES (%s, %s, %s, %s)
-            ''', (usuario.id, usuario.userName, usuario.id_account, usuario.promNota))
+                INSERT INTO usuarios (id, userName, contrasena, id_account, promNota)
+                VALUES (%s,%s ,%s, %s, %s)
+            ''', (usuario.id, usuario.userName, usuario.contrasena, usuario.id_account, usuario.promNota))
             self.conexion.commit()
             print("Usuario insertado correctamente.")
         except mysql.connector.Error as e:
