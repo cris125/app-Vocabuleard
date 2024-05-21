@@ -64,13 +64,12 @@ class CalculoAreaCurva:
         # Rellenar el área debajo de la línea
         plt.fill_between(datosX, datosY, facecolor='white', alpha=0.6)
 
-        plt.title("Visualización de Muestra", fontsize=10)
-        plt.xlabel("Datos X")
-        plt.ylabel("Datos Y")
-        plt.legend()
+        plt.title("Curva de aprendizaje", fontsize=10)
+        plt.xlabel("Notas Segun tiempo")
+        plt.ylabel("Desempeño pruebas")
 
         # Cerrar la figura
-        e=ft.Row([ft.Row([MatplotlibChart(fig, expand=True)],width=600)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
+        e=ft.Row([ft.Row([MatplotlibChart(fig, expand=True)],width=700)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
         # Indicar al usuario dónde se guardó la imagen
         return(e)
     def integralDefi(self,funcion,limInf,limSup):
@@ -91,10 +90,9 @@ class CalculoAreaCurva:
         return area
 
 
-    def main(self,datosY:list):
-        
-        datosY=[1,1.3,5,1,2,3,6,9,9]
-        datosX = [i for i in range(len(datosY))]
+    def main(self,datosY:list,datosX:list=None):
+        if datosX==None:
+            datosX = [i for i in range(len(datosY))]
         
         pendiente = self.hacerPendienteFormula(datosX, datosY)
         newY=self.hacerFucion(datosX,datosY,pendiente)
@@ -102,8 +100,8 @@ class CalculoAreaCurva:
 
         grafico=self.hacerGrefico(datosX, newY,datosY)
         newFuncion=CrearFucion(pendiente,self.saberConstante(datosX,datosY,pendiente))
-        
-        print(self.integralDefi(newFuncion.imagen,0,max(datosX)))
-        return(grafico)
+        area=self.integralDefi(newFuncion.imagen,0,max(datosX))
+        textoArea=ft.Row([ft.Text(value=f"Area bajo la curva : {area}",size=18)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
+        return(ft.Column([textoArea,grafico]))
 
 

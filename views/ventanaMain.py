@@ -16,7 +16,7 @@ from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
 from .viewCrearUsuario import CrearUsuario
 from .viewNotasComunes import NotasComunes
-
+from .viewAnalisisMatematico import AnalisisMat
 class VentanaMain:
     def iniciar(self):
        ft.app(target=self.main, view=ft.AppView.WEB_BROWSER)
@@ -123,6 +123,17 @@ class VentanaMain:
                         self.page.views.append(ft.View(
                                 "/pagInicioAdmin/notaComun",[ft.Column(
                                         [a.ventanaAdmin(self.page),h.graficaNotasComunes(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
+                        
+                if  self.page.route == "/pagInicioAdmin/analisisMatematico":
+                        a=VentanaPrincipalAdmin()
+                        h=AnalisisMat()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/analisisMatematico",[ft.Column(
+                                        [h.pestañaAnalisis(self.page)],
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],

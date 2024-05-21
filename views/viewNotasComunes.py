@@ -59,7 +59,9 @@ class NotasComunes:
         ax.set_ylabel("Cantidad Notas Repetidas")
         ax.set_title("Gráfica de notas más comunes")
 
-        e=ft.Row([ft.Row([MatplotlibChart(fig, expand=True)],width=800)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
+        e=ft.Row([
+            ft.ElevatedButton(text="analisis matematico",on_click=lambda _: page.go("/pagInicioAdmin/analisisMatematico")  ),
+            ft.Row([MatplotlibChart(fig, expand=True)],width=800)],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
         
         # Agregar la gráfica al reporte
         return(e)
