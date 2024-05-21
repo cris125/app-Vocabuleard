@@ -13,3 +13,4 @@ from .viewInterfazUsuario import InterfazUsuario
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
 from .viewCrearUsuario import CrearUsuario
+from .viewCalculoFuncionArea import CalculoAreaCurva

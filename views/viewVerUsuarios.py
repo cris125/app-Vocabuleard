@@ -10,7 +10,7 @@ class ViewVerUsuarios:
         db=DbUsuario()
         usuario=db.ver_tabla_usuario()
         account=db.ver_account()
-        retur=[(usuario[i][0],usuario[i][1],account[i],usuario[i][4]) for i in range(len(usuario))]
+        retur=[(usuario[i][0],usuario[i][1],usuario[i][3],usuario[i][4]) for i in range(len(usuario))]
         return(retur)
         
     def ventanaVerUsuario(self):
@@ -31,7 +31,7 @@ class ViewVerUsuarios:
             ft.DataTable(columns=[
                 ft.DataColumn(ft.Text("Id")),
                 ft.DataColumn(ft.Text("User Name")),
-                ft.DataColumn(ft.Text("Acount"), numeric=True),
+                ft.DataColumn(ft.Text("Acount Id"), numeric=True),
                 ft.DataColumn(ft.Text("Promedio Nota")),
             ],rows=row,
             )],alignment=ft.MainAxisAlignment.CENTER,)  
