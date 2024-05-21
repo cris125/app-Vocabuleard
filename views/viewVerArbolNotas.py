@@ -13,9 +13,9 @@ class ArbolNotas:
         for usuario in usuarios:
             
             
-            if usuario[3] != None:
+            if usuario[4] != None:
                 
-                arbolBinario.insertar(float(usuario[3]))
+                arbolBinario.insertar(float(usuario[4]))
 
         arbol = arbolBinario.verMatriz()
         return (arbol)

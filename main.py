@@ -1,6 +1,7 @@
 from baseDeDatos.dbUsuario import DbUsuario
 from views.ventanaMain import VentanaMain 
 from baseDeDatos.eliminarTablas import ElimTablas
+
 class Main:
     def __init__(self) -> None:
         e=DbUsuario()
