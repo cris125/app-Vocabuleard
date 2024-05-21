@@ -31,7 +31,7 @@ class ViewAgregarPrueba:
         self.b= ft.TextField(label="Respuestas B")
         self.c=ft.TextField(label="Respuestas C")
         self.d=ft.TextField(label="Respuestas D")
-        self.respuestaCorrecta=ft.TextField(label="Respuestas D")
+        self.respuestaCorrecta=ft.TextField(label="Respuesta D")
         
         continer=ft.Container(content=ft.Column(
             [           ft.Text(value="Pregunta:",size=20),
@@ -56,7 +56,7 @@ class ViewAgregarPrueba:
                 ft.TextButton(text="Agregar Otra pregunta", on_click=self.AgregarOtraPregunta),
                 ft.TextButton(text="Guardar Prueba",on_click=self.guardarPrueba),
                 ft.TextButton(text="Eliminar Pruebas (Segun id)",on_click=lambda _: self.page.go("/pagInicioAdmin/eliminarPrueba")),
-                ft.Text(value="Nombre de purba: ",size=15),
+                ft.Text(value="Nombre de prueba: ",size=15),
                 self.nombrePrueba
                 ]),
                 ft.Row([self.preguntasGuardadas],alignment=ft.MainAxisAlignment.CENTER,),

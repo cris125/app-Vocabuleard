@@ -5,7 +5,7 @@ import time
 import hashlib
 
 class ViewIniciarSesion:
-    textFileUserName=ft.TextField(label="(Nomrbre de usuario)")
+    textFileUserName=ft.TextField(label="(Nombre de usuario)")
     textFilePassword=ft.TextField(label="Contraseña",password=True, can_reveal_password=True)
     contenido=ft.Row(alignment=ft.MainAxisAlignment.CENTER)
 
