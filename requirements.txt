@@ -18,15 +18,9 @@ cycler==0.12.1
 Eel==0.16.0
 exceptiongroup==1.2.0
 fastapi==0.110.0
-<<<<<<< HEAD
-flet==0.21.1
-flet-core==0.21.1
-flet-runtime==0.21.1
-=======
 flet==0.21.2
 flet-core==0.21.2
 flet-runtime==0.21.2
->>>>>>> 5afdfcf3b4e137b0da9ed01518eedc6072a65f0c
 fonttools==4.51.0
 future==1.0.0
 gevent==24.2.1
