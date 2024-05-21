@@ -17,11 +17,20 @@ class NotasComunes:
 
         dbUsu=DbUsuario()
         account=dbUsu.ver_account()
-        notas=[json.loads(i[1]) for i in account if i[1] != None]
+        notas=[i[1] for i in account if i[1] != None]
+        notasDicci=[]
+        errores=[]
         notasPro=[]
         for i in notas:
+            try:
+                notasDicci.append(json.loads(i))
+            except:
+                errores.append(i)
+        for i in notasDicci:
             for h in i.values():
-                notasPro.extend(h)
+                notasPro.extend(h)    
+
+        
     
         # Insertar 50 valores aleatorios en el árbol
         for i in notasPro:
