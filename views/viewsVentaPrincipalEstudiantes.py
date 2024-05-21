@@ -38,7 +38,7 @@ class VentanaPrincipalEstudiante:
     
         
         
-        pruebas=self.ususario[2][0][1]
+        pruebas=self.ususario[3][0][1]
         
         self.calificaionPrueba=[]
         for i in preguntas:

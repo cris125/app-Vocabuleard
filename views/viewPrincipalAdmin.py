@@ -18,6 +18,7 @@ class VentanaPrincipalAdmin:
             ft.Container(content=ft.TextButton(text="Eliminar Usuarios",on_click=lambda _: self.page.go("/pagInicioAdmin/eliminarUsuario"))),
             ft.Container(content=ft.TextButton(text="Ver pruebas",on_click=lambda _: self.page.go("/pagInicioAdmin/verPruebas"))),
             ft.Container(content=ft.TextButton(text="Ver arbol notas",on_click=lambda _: self.page.go("/pagInicioAdmin/verArbolNotas"))),
-            ft.Container(content=ft.TextButton(text="Atras",on_click=self.salir))],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
+            ft.Container(content=ft.TextButton(text="Notas mas comunes",on_click=lambda _: self.page.go("/pagInicioAdmin/notaComun"))),
+            ft.Container(content=ft.TextButton(text="Salir",on_click=self.salir))],alignment=ft.MainAxisAlignment.SPACE_EVENLY,)
         ,bgcolor=ft.colors.SECONDARY_CONTAINER, padding=15)
         return(a)

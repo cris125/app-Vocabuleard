@@ -15,7 +15,7 @@ from .viewVocabulay import Vocabulay
 from .viewEje import EjercicioFrase
 from .viewProgreso import MostrarProgreso
 from .viewCrearUsuario import CrearUsuario
-
+from .viewNotasComunes import NotasComunes
 
 class VentanaMain:
     def iniciar(self):
@@ -113,6 +113,16 @@ class VentanaMain:
                         self.page.views.append(ft.View(
                                 "/pagInicioAdmin/verArbolNotas",[ft.Column(
                                         [a.ventanaAdmin(self.page),h.contador(self.page)],
+                                        scroll=True,  # Habilita la barra de desplazamiento vertical
+                                        alignment=ft.alignment.center
+                                )],
+                        ))
+                if  self.page.route == "/pagInicioAdmin/notaComun":
+                        a=VentanaPrincipalAdmin()
+                        h=NotasComunes()   
+                        self.page.views.append(ft.View(
+                                "/pagInicioAdmin/notaComun",[ft.Column(
+                                        [a.ventanaAdmin(self.page),h.graficaNotasComunes(self.page)],
                                         scroll=True,  # Habilita la barra de desplazamiento vertical
                                         alignment=ft.alignment.center
                                 )],
